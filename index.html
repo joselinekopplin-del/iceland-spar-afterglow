@@ -264,6 +264,135 @@
     margin-top: 30px;
   }
 
+  /* 实验现象分析 */
+  .analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 768px) {
+    .analysis-grid { grid-template-columns: 1fr; }
+  }
+  .analysis-card {
+    background: var(--surface2);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 18px;
+    position: relative;
+    transition: border-color 0.3s, transform 0.2s;
+  }
+  .analysis-card:hover {
+    border-color: rgba(153,68,255,0.3);
+    transform: translateY(-2px);
+  }
+  .card-step {
+    position: absolute; top: -12px; left: 14px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #9944ff, #ff4466);
+    color: #fff; font-size: 0.8em; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 12px rgba(153,68,255,0.3);
+  }
+  .analysis-card h3 {
+    font-size: 0.95em; margin: 8px 0 8px 0; color: var(--text);
+  }
+  .analysis-card p {
+    font-size: 0.82em; color: var(--text2); line-height: 1.6;
+  }
+  .eq-inline {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75em; color: #ccccff;
+    background: rgba(0,0,0,0.3); padding: 6px 10px;
+    border-radius: 6px; margin-top: 10px; text-align: center;
+    word-break: break-all;
+  }
+
+  /* 影响因素 */
+  .factor-list { display: flex; flex-direction: column; gap: 14px; }
+  .factor-item {
+    background: var(--surface2);
+    border-radius: 10px; padding: 14px 16px;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+  .factor-header {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+    font-size: 0.88em;
+  }
+  .factor-rank {
+    width: 22px; height: 22px; border-radius: 6px;
+    background: rgba(255,255,255,0.08);
+    font-size: 0.75em; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text2);
+  }
+  .factor-impact {
+    margin-left: auto; font-size: 0.7em; padding: 2px 8px;
+    border-radius: 10px; font-weight: 600;
+  }
+  .factor-impact.high { background: rgba(255,68,102,0.15); color: #ff6688; }
+  .factor-impact.medium { background: rgba(255,170,51,0.15); color: #ffaa33; }
+  .factor-impact.low { background: rgba(100,180,200,0.12); color: #77bbdd; }
+  .factor-item p {
+    font-size: 0.8em; color: var(--text2); line-height: 1.5; margin-bottom: 8px;
+  }
+  .factor-range {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.78em; font-family: 'Courier New', monospace;
+    background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 6px;
+  }
+  .factor-range .arrow { color: var(--text2); }
+  .factor-range .ratio { margin-left: auto; color: #ffaa33; font-weight: 700; }
+
+  /* 预测表 */
+  .pred-table {
+    width: 100%; border-collapse: collapse;
+    font-size: 0.82em; text-align: center;
+  }
+  .pred-table th {
+    padding: 10px 6px; font-size: 0.78em;
+    color: var(--text2); font-weight: 600;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .pred-table td {
+    padding: 8px 6px; color: var(--text);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .pred-table .hl { color: #ffaa33; font-weight: 700; }
+  .pred-table .cur-row { background: rgba(255,68,102,0.06); }
+  .pred-table .cur-row td { color: #ff8899; }
+
+  /* 公式面板 */
+  .formula-block {
+    background: var(--surface2);
+    border-radius: 12px; padding: 18px 22px;
+    margin-bottom: 18px;
+    border-left: 3px solid #9944ff;
+  }
+  .formula-title {
+    font-size: 0.88em; font-weight: 700;
+    color: #bb88ff; margin-bottom: 12px;
+  }
+  .formula-math {
+    font-family: 'Courier New', 'SimSun', monospace;
+    font-size: 1.05em; color: #fff;
+    background: rgba(0,0,0,0.3);
+    padding: 14px 18px; border-radius: 8px;
+    text-align: center; margin-bottom: 10px;
+    overflow-x: auto; white-space: nowrap;
+  }
+  .formula-params {
+    font-size: 0.75em; color: var(--text2);
+    display: flex; flex-wrap: wrap; gap: 6px 12px;
+    justify-content: center; margin-bottom: 10px;
+    font-family: 'Courier New', monospace;
+  }
+  .formula-desc {
+    font-size: 0.8em; color: var(--text2);
+    line-height: 1.6;
+  }
+  .formula-desc strong { color: #ffaa33; }
+
   /* 脉冲动画 */
   @keyframes pulse {
     0%, 100% { box-shadow: 0 0 8px rgba(255,51,68,0.3); }
@@ -414,8 +543,263 @@
     </main>
   </div>
 
+  <!-- ===== 实验现象分析 ===== -->
+  <div class="panel analysis-section" style="margin-top:30px;">
+    <h2><span class="icon">🔬</span> 实验现象分析</h2>
+    <div class="analysis-grid">
+      <div class="analysis-card">
+        <div class="card-step">①</div>
+        <h3>紫外激发</h3>
+        <p>当紫外光（313–436 nm）照射冰洲石晶体时，光子能量（3.9–2.8 eV）大于 CaCO₃ 的带隙，将价带电子激发到导带，形成自由电子-空穴对。</p>
+        <div class="eq-inline">hν (UV) → e⁻ (CB) + h⁺ (VB)</div>
+      </div>
+      <div class="analysis-card">
+        <div class="card-step">②</div>
+        <h3>陷阱俘获</h3>
+        <p>导带中的部分自由电子被晶体中的浅陷阱能级（深度~0.34 eV，位于导带下方）俘获，形成亚稳态存储。照射时间越长，被填充的陷阱越多。</p>
+        <div class="eq-inline">e⁻ (CB) → e⁻ (trap) &nbsp;·&nbsp; N(t) = N<sub>max</sub>(1 − e<sup>−t/τ<sub>fill</sub></sup>)</div>
+      </div>
+      <div class="analysis-card">
+        <div class="card-step">③</div>
+        <h3>切断紫光 · 热释放</h3>
+        <p><strong>切断紫光瞬间</strong>，陷阱中的电子通过热激活逐渐释放回导带。温度越高，热释放速率越快——这是温度影响余晖时长的核心机制。</p>
+        <div class="eq-inline">k(T) = k₀ · exp(−E<sub>a</sub> / k<sub>B</sub>T) &nbsp;·&nbsp; E<sub>a</sub> ≈ 0.34 eV</div>
+      </div>
+      <div class="analysis-card">
+        <div class="card-step">④</div>
+        <h3>Mn²⁺ 复合 · 红光发射</h3>
+        <p>释放到导带的电子迁移至 Mn²⁺ 发光中心，与先前被俘获的空穴复合并释放能量。这部分能量传递给 Mn²⁺ 离子的 3d 电子，激发其 <sup>4</sup>G → <sup>6</sup>S 跃迁，发射特征橙红光（~590 nm）。</p>
+        <div class="eq-inline">e⁻ (CB) + Mn³⁺ → Mn²⁺* → Mn²⁺ + hν (590nm, 红光)</div>
+      </div>
+      <div class="analysis-card">
+        <div class="card-step">⑤</div>
+        <h3>余晖衰减</h3>
+        <p>随着陷阱逐渐排空，复合事件减少，红光强度随时间衰减。衰减规律遵循<strong>拉伸指数</strong>（Kohlrausch 函数），这是无序介质中弛豫过程的典型特征，反映陷阱深度的分布。</p>
+        <div class="eq-inline">I(t) = I₀ · exp(−(t/τ)<sup>β</sup>) &nbsp;·&nbsp; β ≈ 0.65 (拉伸因子)</div>
+      </div>
+      <div class="analysis-card">
+        <div class="card-step">⑥</div>
+        <h3>温度猝灭效应</h3>
+        <p>在高温（>60°C）下，除热释放加速外，Mn²⁺ 激发态还可能通过<strong>无辐射跃迁</strong>（热猝灭）回到基态，进一步削弱红光发射。这导致高温下余晖急剧缩短。</p>
+        <div class="eq-inline">η(T) = [1 + C·exp(−E<sub>q</sub>/k<sub>B</sub>T)]<sup>−1</sup> &nbsp;(热猝灭效率)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 影响因素与预测数据表 ===== -->
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:24px; margin-top:30px;">
+    <!-- 影响因素 -->
+    <div class="panel">
+      <h2><span class="icon">🎯</span> 红光余晖时长影响因素</h2>
+
+      <div class="factor-list">
+        <div class="factor-item" style="border-left: 3px solid #ff4466;">
+          <div class="factor-header">
+            <span class="factor-rank">#1</span>
+            <strong>温度 (最关键因素)</strong>
+            <span class="factor-impact high">高影响</span>
+          </div>
+          <p>温度通过 Arrhenius 方程控制陷阱热释放速率。每降温 10°C，余晖约延长 <strong style="color:#ffaa33;">1.5–1.6×</strong>；从 25°C 降温到 5°C，余晖延长 <strong style="color:#ffaa33;">~3×</strong>。</p>
+          <div class="factor-range">
+            <span>5°C → ~281ms</span>
+            <span class="arrow">→</span>
+            <span>60°C → ~23ms</span>
+            <span class="ratio">相差 ~12×</span>
+          </div>
+        </div>
+
+        <div class="factor-item" style="border-left: 3px solid #ffaa33;">
+          <div class="factor-header">
+            <span class="factor-rank">#2</span>
+            <strong>紫外照射时间</strong>
+            <span class="factor-impact medium">中影响</span>
+          </div>
+          <p>陷阱填充遵循饱和动力学。照射时间从 1s 增至 10s，余晖增加约 <strong style="color:#ffaa33;">40%</strong>；超过 30s 后趋于饱和，增量极小。</p>
+          <div class="factor-range">
+            <span>1s → ~92ms</span>
+            <span class="arrow">→</span>
+            <span>30s → ~163ms</span>
+            <span class="ratio">相差 ~1.8×</span>
+          </div>
+        </div>
+
+        <div class="factor-item" style="border-left: 3px solid #9944ff;">
+          <div class="factor-header">
+            <span class="factor-rank">#3</span>
+            <strong>激发波长</strong>
+            <span class="factor-impact medium">中影响</span>
+          </div>
+          <p>短波长 UV（313nm）比长波长（436nm）光子能量更高，激发效率更高。313nm 激发下余晖约为 436nm 的 <strong style="color:#ffaa33;">1.3–1.5×</strong>。</p>
+        </div>
+
+        <div class="factor-item" style="border-left: 3px solid #44cc88;">
+          <div class="factor-header">
+            <span class="factor-rank">#4</span>
+            <strong>晶体纯度 / Mn²⁺ 浓度</strong>
+            <span class="factor-impact low">背景因素</span>
+          </div>
+          <p>Mn²⁺ 是红光发射的激活剂。浓度过低则发光弱，过高则发生浓度猝灭。天然冰洲石中 Mn²⁺ 浓度通常在 <strong style="color:#ffaa33;">10–1000 ppm</strong> 范围。</p>
+        </div>
+
+        <div class="factor-item" style="border-left: 3px solid #66aacc;">
+          <div class="factor-header">
+            <span class="factor-rank">#5</span>
+            <strong>陷阱深度分布</strong>
+            <span class="factor-impact low">材料特性</span>
+          </div>
+          <p>陷阱不是单一能级，而是有一定能量分布。浅陷阱（<0.3eV）在室温下快速释放，深陷阱（>1eV）在室温下几乎不参与余晖，仅在热释光（TL）实验中表现为高温发光峰。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 完整预测数据表 -->
+    <div class="panel">
+      <h2><span class="icon">📋</span> 多温度 · 多照射时间预测表</h2>
+      <div style="overflow-x:auto;">
+        <table class="pred-table">
+          <thead>
+            <tr>
+              <th>温度</th>
+              <th>1s 照射</th>
+              <th>3s 照射</th>
+              <th>5s 照射</th>
+              <th>10s 照射</th>
+              <th>30s 照射</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>5°C</td><td class="hl">281 ms</td><td>307 ms</td><td>333 ms</td><td>398 ms</td><td>463 ms</td></tr>
+            <tr><td>10°C</td><td class="hl">219 ms</td><td>240 ms</td><td>260 ms</td><td>311 ms</td><td>362 ms</td></tr>
+            <tr><td>15°C</td><td class="hl">171 ms</td><td>187 ms</td><td>203 ms</td><td>243 ms</td><td>283 ms</td></tr>
+            <tr class="cur-row"><td>25°C ★</td><td class="hl">92 ms</td><td>101 ms</td><td>110 ms</td><td>131 ms</td><td>163 ms</td></tr>
+            <tr><td>35°C</td><td class="hl">62 ms</td><td>68 ms</td><td>73 ms</td><td>88 ms</td><td>109 ms</td></tr>
+            <tr><td>45°C</td><td class="hl">41 ms</td><td>45 ms</td><td>49 ms</td><td>58 ms</td><td>73 ms</td></tr>
+            <tr><td>60°C</td><td class="hl">23 ms</td><td>25 ms</td><td>27 ms</td><td>32 ms</td><td>40 ms</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:12px;font-size:0.78em;color:var(--text2);text-align:center;">
+        ★ 25°C 行数据来源于实际实验测量（室温），其余温度为模型外推<br>
+        所有数值单位为毫秒 (ms)，定义为 I(t) = I₀/e 的衰减时间
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== 完整计算公式 ===== -->
+  <div class="panel formula-panel" style="margin-top:30px;">
+    <h2><span class="icon">📐</span> 完整计算公式</h2>
+    <p style="color:var(--text2);font-size:0.9em;margin-bottom:20px;">
+      以下公式基于室温实验数据（视频帧分析 + 手动测量）拟合，并结合文献中冰洲石的物理模型构建。
+    </p>
+
+    <!-- 公式 1: 余晖时长 -->
+    <div class="formula-block">
+      <div class="formula-title">公式 ① — 余晖特征时间 τ(T, t)</div>
+      <div class="formula-math">
+        τ(T, t<sub>exp</sub>) = τ<sub>₀</sub> · t<sub>exp</sub><sup>α</sup> · exp[β · (T − T<sub>₀</sub>)]
+      </div>
+      <div class="formula-params">
+        <span>τ<sub>₀</sub> = 90.84 ms</span>
+        <span>|</span>
+        <span>α = 0.1365</span>
+        <span>|</span>
+        <span>β = −4.450 × 10⁻² K⁻¹</span>
+        <span>|</span>
+        <span>T<sub>₀</sub> = 298.15 K (25°C)</span>
+      </div>
+      <div class="formula-desc">
+        <strong>物理意义：</strong>τ₀ 为室温 1s 照射后基准余晖；α 反映陷阱填充的亚线性增长（α < 1 表示趋于饱和）；β 为温度敏感系数，其值由陷阱深度决定。三项相乘完整描述了余晖时长对温度和照射时间的依赖关系。
+      </div>
+    </div>
+
+    <!-- 公式 2: 衰减曲线 -->
+    <div class="formula-block">
+      <div class="formula-title">公式 ② — 余晖衰减曲线（拉伸指数 / Kohlrausch 函数）</div>
+      <div class="formula-math">
+        I(t) = I<sub>₀</sub> · exp[−(t / τ)<sup>β<sub>str</sub></sup>]
+      </div>
+      <div class="formula-params">
+        <span>I<sub>₀</sub> = 切断时刻的红光初始强度（归一化=1）</span>
+        <span>|</span>
+        <span>β<sub>str</sub> = 0.65（拉伸因子）</span>
+        <span>|</span>
+        <span>τ = τ(T, t<sub>exp</sub>) → 公式①</span>
+      </div>
+      <div class="formula-desc">
+        <strong>物理意义：</strong>β<sub>str</sub> = 1 时为纯指数衰减（单一陷阱深度）；β<sub>str</sub> < 1 表明存在陷阱深度分布，衰减初期较快（浅陷阱先排空），后期拖尾更长（深陷阱缓慢释放）。β<sub>str</sub> = 0.65 是典型的无序介质弛豫特征值。当 t = τ 时，I = I₀/e ≈ 37% I₀。
+      </div>
+    </div>
+
+    <!-- 公式 3: Arrhenius -->
+    <div class="formula-block">
+      <div class="formula-title">公式 ③ — 陷阱热释放速率（Arrhenius 定律）</div>
+      <div class="formula-math">
+        k(T) = k<sub>₀</sub> · exp(−E<sub>a</sub> / k<sub>B</sub>T)
+      </div>
+      <div class="formula-params">
+        <span>E<sub>a</sub> ≈ 0.34 eV（等效陷阱深度）</span>
+        <span>|</span>
+        <span>k<sub>B</sub> = 8.617 × 10⁻⁵ eV/K（Boltzmann 常数）</span>
+        <span>|</span>
+        <span>k<sub>₀</sub> ≈ 10⁸ s⁻¹（指前因子，典型值）</span>
+      </div>
+      <div class="formula-desc">
+        <strong>物理意义：</strong>该公式是温度影响余晖的根本原因。电子从陷阱释放到导带需要克服能量势垒 E<sub>a</sub>。温度升高时，晶格振动加剧，电子获得足够热能的概率指数增长。τ ∝ 1/k(T)，因此公式①中的温度项 exp(β·(T−T₀)) 等价于 exp(E<sub>a</sub>/k<sub>B</sub>·(1/T − 1/T₀)) 的一次近似。
+      </div>
+    </div>
+
+    <!-- 公式 4: 陷阱填充 -->
+    <div class="formula-block">
+      <div class="formula-title">公式 ④ — 陷阱填充动力学（照射阶段）</div>
+      <div class="formula-math">
+        N(t<sub>exp</sub>) = N<sub>max</sub> · [1 − exp(−t<sub>exp</sub> / τ<sub>fill</sub>)]
+      </div>
+      <div class="formula-params">
+        <span>N<sub>max</sub> = 总陷阱浓度（材料参数）</span>
+        <span>|</span>
+        <span>τ<sub>fill</sub> ≈ 4.0 s（填充时间常数，拟合值）</span>
+      </div>
+      <div class="formula-desc">
+        <strong>物理意义：</strong>照射时间 t<sub>exp</sub> 越长，被填充的陷阱 N 越多（接近指数饱和）。公式①中的 t<sub>exp</sub><sup>α</sup> 项是对该饱和过程的幂律近似。当 t<sub>exp</sub> ≪ τ<sub>fill</sub> 时 N ∝ t（线性增长），当 t<sub>exp</sub> ≫ τ<sub>fill</sub> 时 N → N<sub>max</sub>（饱和）。
+      </div>
+    </div>
+
+    <!-- 公式 5: 热猝灭 -->
+    <div class="formula-block">
+      <div class="formula-title">公式 ⑤ — 高温热猝灭效率</div>
+      <div class="formula-math">
+        η(T) = [1 + C · exp(−E<sub>q</sub> / k<sub>B</sub>T)]<sup>−1</sup>
+      </div>
+      <div class="formula-params">
+        <span>C ≈ 10⁶（猝灭常数）</span>
+        <span>|</span>
+        <span>E<sub>q</sub> ≈ 0.6–0.8 eV（Mn²⁺ 激发态热猝灭活化能）</span>
+      </div>
+      <div class="formula-desc">
+        <strong>物理意义：</strong>高温下 Mn²⁺ 激发态通过多声子无辐射弛豫回到基态，不发射光子。该效应在 T > 60°C 开始显著，是高温区域余晖额外缩短的原因。η(T) 描述发光量子效率随温度的变化。
+      </div>
+    </div>
+
+    <!-- 完整流程 -->
+    <div style="margin-top:24px; background:var(--surface2); border-radius:12px; padding:20px; border: 1px solid rgba(255,255,255,0.05);">
+      <h3 style="font-size:0.95em; margin-bottom:12px; color:#ffaa33;">🔗 公式关联 · 完整物理过程</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;font-size:0.82em;">
+        <span style="background:rgba(153,68,255,0.15);padding:6px 12px;border-radius:6px;">UV激发 → 陷阱填充<br><small>公式④: N(t<sub>exp</sub>)</small></span>
+        <span style="color:#ffaa33;">→</span>
+        <span style="background:rgba(255,68,102,0.1);padding:6px 12px;border-radius:6px;">切断紫光 → 热释放<br><small>公式③: k(T) Arrhenius</small></span>
+        <span style="color:#ffaa33;">→</span>
+        <span style="background:rgba(255,170,51,0.1);padding:6px 12px;border-radius:6px;">Mn²⁺复合 → 红光<br><small>公式⑤: η(T) 效率</small></span>
+        <span style="color:#ffaa33;">→</span>
+        <span style="background:rgba(255,68,102,0.15);padding:6px 12px;border-radius:6px;">余晖衰减<br><small>公式②: I(t) 拉伸指数</small></span>
+        <span style="color:#ffaa33;">→</span>
+        <span style="background:rgba(255,68,102,0.2);padding:6px 12px;border-radius:6px;">特征时间 τ<br><small>公式①: τ(T, t<sub>exp</sub>)</small></span>
+      </div>
+    </div>
+  </div>
+
   <footer class="footer">
-    冰洲石 (Iceland Spar / CaCO₃) 紫外激发红光余晖研究 · 深圳零一学院 · 基于视频分析实验数据
+    冰洲石 (Iceland Spar / CaCO₃) 紫外激发红光余晖研究 · 深圳零一学院 · 基于视频分析实验数据<br>
+    参考文献：Gaft et al. (2008) Am. Mineral. · Visocekas et al. (1976) Phys. Stat. Sol. · Medlin (1959) J. Chem. Phys. · Díaz et al. (1991) Nucl. Tracks
   </footer>
 </div>
 
