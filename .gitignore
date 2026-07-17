@@ -1,0 +1,18 @@
+# Experiment data - not needed for webpage
+*.mp4
+*.xlsx
+*.json
+*.png
+*.ps1
+*.py
+*.txt
+*.html.bak
+
+# System files
+.claude/
+memory/
+SOUL.md
+USER.md
+.agents/
+outputs/
+视频分析/

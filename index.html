@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>冰洲石紫外激发红光余晖模拟器 | Iceland Spar Afterglow Simulator</title>
+<style>
+  :root {
+    --bg: #0a0a14;
+    --surface: #111122;
+    --surface2: #1a1a30;
+    --text: #e0e0f0;
+    --text2: #a0a0c0;
+    --accent: #ff4466;
+    --accent2: #ff2244;
+    --blue: #4466ff;
+    --violet: #8844ff;
+    --gold: #ffaa33;
+    --glow-red: #ff3344;
+    --glow-violet: #9944ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* 背景粒子效果 */
+  .bg-particles {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* 主容器 */
+  .container {
+    position: relative; z-index: 1;
+    max-width: 1100px; margin: 0 auto;
+    padding: 20px;
+  }
+
+  /* 头部 */
+  .header {
+    text-align: center; padding: 40px 20px 30px;
+    background: linear-gradient(180deg, rgba(136,68,255,0.08) 0%, transparent 100%);
+    border-bottom: 1px solid rgba(136,68,255,0.15);
+    margin-bottom: 30px;
+  }
+  .header h1 {
+    font-size: 2.2em; font-weight: 700;
+    background: linear-gradient(135deg, #9944ff, #ff4466, #ff8844);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+  }
+  .header .subtitle {
+    font-size: 0.95em; color: var(--text2);
+    letter-spacing: 1px;
+  }
+  .header .badge {
+    display: inline-block; margin-top: 12px;
+    padding: 4px 16px; border-radius: 20px;
+    font-size: 0.8em;
+    background: rgba(153,68,255,0.15);
+    border: 1px solid rgba(153,68,255,0.3);
+    color: #aa77ff;
+  }
+
+  /* 主布局 */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 24px;
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: 768px) {
+    .main-grid { grid-template-columns: 1fr; }
+    .header h1 { font-size: 1.5em; }
+  }
+
+  /* 面板样式 */
+  .panel {
+    background: var(--surface);
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 24px;
+    backdrop-filter: blur(10px);
+  }
+  .panel h2 {
+    font-size: 1.05em; font-weight: 600;
+    color: var(--text);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .panel h2 .icon { font-size: 1.3em; }
+
+  /* 控制面板 */
+  .control-group {
+    margin-bottom: 22px;
+  }
+  .control-group label {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.88em; color: var(--text2); margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .control-group label .val {
+    color: var(--accent); font-weight: 700;
+    font-size: 0.95em;
+  }
+
+  /* 自定义滑块 */
+  input[type="range"] {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 8px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--violet), var(--accent));
+    outline: none;
+    cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid var(--accent);
+    cursor: pointer;
+    box-shadow: 0 0 16px rgba(255,68,102,0.5);
+    transition: box-shadow 0.2s;
+  }
+  input[type="range"]::-webkit-slider-thumb:hover {
+    box-shadow: 0 0 24px rgba(255,68,102,0.8);
+  }
+
+  /* 温度刻度标记 */
+  .temp-ticks {
+    display: flex; justify-content: space-between;
+    font-size: 0.7em; color: var(--text2);
+    margin-top: 4px; padding: 0 4px;
+  }
+  .temp-ticks span { cursor: pointer; transition: color 0.2s; }
+  .temp-ticks span:hover { color: var(--accent); }
+
+  /* 按钮 */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 6px; padding: 10px 20px;
+    border-radius: 10px; border: none;
+    font-size: 0.9em; font-weight: 600; cursor: pointer;
+    transition: all 0.2s; letter-spacing: 0.5px;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #9944ff, #ff4466);
+    color: white; width: 100%;
+    box-shadow: 0 4px 20px rgba(255,68,102,0.2);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 6px 30px rgba(255,68,102,0.4);
+    transform: translateY(-1px);
+  }
+  .btn-reset {
+    background: var(--surface2); color: var(--text2);
+    border: 1px solid rgba(255,255,255,0.1);
+    width: 100%; margin-top: 8px;
+  }
+  .btn-reset:hover {
+    background: rgba(255,255,255,0.05); color: var(--text);
+  }
+
+  /* 结果显示 */
+  .result-display {
+    background: rgba(255,51,68,0.08);
+    border: 1px solid rgba(255,51,68,0.2);
+    border-radius: 12px; padding: 16px; margin-top: 16px;
+    text-align: center;
+  }
+  .result-display .big-number {
+    font-size: 2.8em; font-weight: 800;
+    color: var(--glow-red); line-height: 1;
+    font-family: 'Courier New', monospace;
+  }
+  .result-display .unit { font-size: 0.5em; color: var(--text2); }
+  .result-display .label-text {
+    font-size: 0.8em; color: var(--text2); margin-top: 4px;
+  }
+
+  /* 可视化面板 */
+  .viz-panel {
+    position: relative; min-height: 420px;
+  }
+  .viz-tabs {
+    display: flex; gap: 4px; margin-bottom: 16px;
+  }
+  .viz-tabs button {
+    flex: 1; padding: 8px 12px;
+    border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);
+    background: transparent; color: var(--text2);
+    font-size: 0.82em; cursor: pointer; transition: all 0.2s;
+    font-weight: 500;
+  }
+  .viz-tabs button.active {
+    background: rgba(153,68,255,0.2);
+    border-color: rgba(153,68,255,0.4);
+    color: #bb88ff;
+  }
+  .canvas-container {
+    position: relative; width: 100%; height: 320px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 12px; overflow: hidden;
+  }
+  canvas { width: 100%; height: 100%; display: block; }
+
+  /* 物理过程可视化 */
+  .physics-viz {
+    width: 100%; height: 260px;
+    margin-top: 8px;
+    position: relative;
+  }
+
+  /* 图例 */
+  .legend {
+    display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px;
+    font-size: 0.8em;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 6px;
+  }
+  .legend-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+
+  /* 数据拟合面板 */
+  .fitting-panel { margin-top: 24px; }
+  .eq-box {
+    background: var(--surface2);
+    border-radius: 10px; padding: 14px 18px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85em; color: #ccccff;
+    margin: 8px 0; text-align: center;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .param-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; margin-top: 12px;
+  }
+  .param-item {
+    background: var(--surface2); border-radius: 8px;
+    padding: 10px 14px; font-size: 0.82em;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .param-item .pname { color: var(--text2); font-size: 0.85em; }
+  .param-item .pval { color: var(--accent); font-size: 1.1em; font-weight: 700; }
+
+  /* 底部 */
+  .footer {
+    text-align: center; padding: 20px;
+    color: rgba(255,255,255,0.25); font-size: 0.78em;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    margin-top: 30px;
+  }
+
+  /* 脉冲动画 */
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 8px rgba(255,51,68,0.3); }
+    50% { box-shadow: 0 0 24px rgba(255,51,68,0.6); }
+  }
+  .pulsing { animation: pulse 2s ease-in-out infinite; }
+</style>
+</head>
+<body>
+
+<!-- 背景粒子 Canvas -->
+<canvas class="bg-particles" id="bgCanvas"></canvas>
+
+<div class="container">
+  <!-- 头部 -->
+  <header class="header">
+    <h1>🔮 冰洲石 · 红光余晖模拟器</h1>
+    <p class="subtitle">Iceland Spar — Red Afterglow under UV Excitation</p>
+    <span class="badge">基于真实实验数据 · 温度 & 照射时间双变量模型</span>
+  </header>
+
+  <!-- 主布局 -->
+  <div class="main-grid">
+    <!-- 左面板: 控制 -->
+    <aside>
+      <div class="panel">
+        <h2><span class="icon">🎛️</span> 实验参数</h2>
+
+        <!-- 温度控制 -->
+        <div class="control-group">
+          <label>🌡️ 温度 <span class="val" id="tempVal">25°C</span></label>
+          <input type="range" id="tempSlider" min="0" max="70" value="25" step="1">
+          <div class="temp-ticks">
+            <span onclick="setTemp(5)">5°C</span>
+            <span onclick="setTemp(15)">15°C</span>
+            <span onclick="setTemp(25)" style="color:#ff6688">25°C</span>
+            <span onclick="setTemp(40)">40°C</span>
+            <span onclick="setTemp(60)">60°C</span>
+          </div>
+        </div>
+
+        <!-- 照射时间控制 -->
+        <div class="control-group">
+          <label>⏱️ 紫外照射时间 <span class="val" id="expVal">5 s</span></label>
+          <input type="range" id="expSlider" min="1" max="30" value="5" step="0.5">
+        </div>
+
+        <!-- 激发波长 (显示用) -->
+        <div class="control-group">
+          <label>💜 激发波长 <span class="val" id="wlVal">365 nm</span></label>
+          <input type="range" id="wlSlider" min="313" max="436" value="365" step="1">
+          <div class="temp-ticks">
+            <span>313nm UV-B</span>
+            <span>365nm UV-A</span>
+            <span>436nm Violet</span>
+          </div>
+        </div>
+
+        <!-- 按钮 -->
+        <button class="btn btn-primary" onclick="triggerFlash()">
+          ⚡ 模拟紫光照射
+        </button>
+        <button class="btn btn-reset" onclick="resetAll()">
+          🔄 重置
+        </button>
+
+        <!-- 结果显示 -->
+        <div class="result-display pulsing" id="resultDisplay">
+          <div class="big-number">
+            <span id="resultMs">113</span><span class="unit"> ms</span>
+          </div>
+          <div class="label-text">预估红光余晖持续时间</div>
+          <div style="margin-top:8px;font-size:0.75em;color:var(--text2);">
+            衰减至阈值的 1/e ≈ <span id="resultE" style="color:#ff8844;">37%</span> 所需时间
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 右面板: 可视化 -->
+    <main>
+      <div class="panel viz-panel">
+        <div class="viz-tabs">
+          <button class="active" onclick="switchTab('decay')">📉 余晖衰减曲线</button>
+          <button onclick="switchTab('fitting')">📊 数据拟合</button>
+          <button onclick="switchTab('model')">🧬 物理模型</button>
+        </div>
+
+        <!-- Tab 1: 衰减曲线 -->
+        <div id="tab-decay" class="canvas-container">
+          <canvas id="decayCanvas"></canvas>
+        </div>
+
+        <!-- Tab 2: 数据拟合 -->
+        <div id="tab-fitting" style="display:none;" class="canvas-container">
+          <canvas id="fittingCanvas"></canvas>
+        </div>
+
+        <!-- Tab 3: 物理模型 -->
+        <div id="tab-model" style="display:none;">
+          <div class="physics-viz">
+            <canvas id="physicsCanvas"></canvas>
+          </div>
+        </div>
+
+        <!-- 图例 -->
+        <div class="legend">
+          <div class="legend-item"><span class="legend-dot" style="background:#ff4466;"></span> 红光余晖强度</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#9944ff;"></span> 紫光激发</div>
+          <div class="legend-item"><span class="legend-dot" style="background:#ffaa33;"></span> 实验数据点</div>
+          <div class="legend-item"><span class="legend-dot" style="background:rgba(255,255,255,0.3);"></span> 阈值线 (1/e)</div>
+        </div>
+      </div>
+
+      <!-- 拟合参数面板 -->
+      <div class="panel fitting-panel" style="margin-top:24px;">
+        <h2><span class="icon">📐</span> 数学模型</h2>
+        <div class="eq-box" id="eqDisplay">
+          τ(T, t) = 90.8 · t<sup>0.136</sup> · exp(−0.0445·(T−25))
+        </div>
+        <div class="param-grid">
+          <div class="param-item">
+            <div class="pname">室温基准 τ₀</div>
+            <div class="pval">90.8 ms</div>
+          </div>
+          <div class="param-item">
+            <div class="pname">照射时间指数 α</div>
+            <div class="pval">0.136</div>
+          </div>
+          <div class="param-item">
+            <div class="pname">温度系数 β</div>
+            <div class="pval">−0.0445 K⁻¹</div>
+          </div>
+          <div class="param-item">
+            <div class="pname">等效活化能</div>
+            <div class="pval">≈ 0.34 eV</div>
+          </div>
+          <div class="param-item">
+            <div class="pname">发射中心</div>
+            <div class="pval">Mn²⁺ (~590nm)</div>
+          </div>
+          <div class="param-item">
+            <div class="pname">复合机制</div>
+            <div class="pval">隧穿+热激活</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    冰洲石 (Iceland Spar / CaCO₃) 紫外激发红光余晖研究 · 深圳零一学院 · 基于视频分析实验数据
+  </footer>
+</div>
+
+<script>
+// ========== 物理模型参数 ==========
+const MODEL = {
+  tau0_ms: 90.84,     // 室温基准余晖时间 (ms)
+  alpha: 0.1365,      // 照射时间幂指数
+  beta: -0.04450,     // 温度系数 (K^-1)
+  T0_C: 25,           // 参考温度
+  T0_K: 298.15,
+
+  // 实验数据点 [照射时间(s), 余晖时间(ms)]
+  dataPoints: [
+    [1.0, 104.4],
+    [3.0, 83.5],
+    [5.0, 112.7],
+    [10.0, 133.6]
+  ],
+
+  // 衰减曲线形状参数 (拉伸指数)
+  stretchBeta: 0.65,
+
+  // 计算余晖时间
+  calcTau(tempC, expTime) {
+    const dT = tempC - this.T0_C;
+    const tauBase = this.tau0_ms * Math.pow(expTime, this.alpha);
+    const tempFactor = Math.exp(this.beta * dT);
+    return Math.max(1, tauBase * tempFactor);
+  },
+
+  // 计算衰减曲线: I(t) = I0 * exp(-(t/tau)^beta)
+  decayIntensity(t_ms, tau_ms, beta) {
+    return Math.exp(-Math.pow(t_ms / tau_ms, beta || this.stretchBeta));
+  }
+};
+
+// ========== 全局状态 ==========
+let currentTemp = 25;
+let currentExp = 5;
+let currentTab = 'decay';
+let isFlashing = false;
+let flashStartTime = 0;
+let animationId = null;
+
+// ========== DOM 元素 ==========
+const $ = (id) => document.getElementById(id);
+const tempSlider = $('tempSlider');
+const expSlider = $('expSlider');
+const wlSlider = $('wlSlider');
+
+// ========== 背景粒子效果 ==========
+function initBgParticles() {
+  const canvas = $('bgCanvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // 创建粒子
+  for (let i = 0; i < 60; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.5 + 0.5,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      opacity: Math.random() * 0.4 + 0.1,
+      color: Math.random() < 0.6
+        ? `rgba(153,68,255,OP)` : `rgba(255,68,102,OP)`
+    });
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const p of particles) {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0) p.x = canvas.width;
+      if (p.x > canvas.width) p.x = 0;
+      if (p.y < 0) p.y = canvas.height;
+      if (p.y > canvas.height) p.y = 0;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color.replace('OP', p.opacity.toFixed(2));
+      ctx.fill();
+    }
+    requestAnimationFrame(animate);
+  }
+  animate();
+}
+
+// ========== 衰减曲线绘图 ==========
+function drawDecayCurve() {
+  const canvas = $('decayCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width = canvas.offsetWidth * 2;
+  const H = canvas.height = canvas.offsetHeight * 2;
+  ctx.scale(2, 2);
+  const w = W / 2, h = H / 2;
+
+  const margin = { top: 20, right: 40, bottom: 40, left: 55 };
+  const pw = w - margin.left - margin.right;
+  const ph = h - margin.top - margin.bottom;
+
+  ctx.clearRect(0, 0, w, h);
+
+  // 背景网格
+  ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+  ctx.lineWidth = 0.5;
+  for (let i = 0; i <= 5; i++) {
+    const y = margin.top + (ph * i) / 5;
+    ctx.beginPath(); ctx.moveTo(margin.left, y); ctx.lineTo(w - margin.right, y); ctx.stroke();
+  }
+  for (let i = 0; i <= 10; i++) {
+    const x = margin.left + (pw * i) / 10;
+    ctx.beginPath(); ctx.moveTo(x, margin.top); ctx.lineTo(x, h - margin.bottom); ctx.stroke();
+  }
+
+  const tau = MODEL.calcTau(currentTemp, currentExp);
+  const maxT = Math.max(tau * 6, 200); // x轴范围: 至少6倍τ或200ms
+
+  // 坐标轴
+  ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(margin.left, margin.top);
+  ctx.lineTo(margin.left, h - margin.bottom);
+  ctx.lineTo(w - margin.right, h - margin.bottom);
+  ctx.stroke();
+
+  // 轴标签
+  ctx.fillStyle = '#a0a0c0';
+  ctx.font = '11px "PingFang SC", "Microsoft YaHei", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('时间 (ms)', w / 2, h - 6);
+  ctx.save();
+  ctx.translate(12, h / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('红光强度 (归一化)', 0, 0);
+  ctx.restore();
+
+  // Y轴刻度
+  ctx.textAlign = 'right';
+  for (let i = 0; i <= 5; i++) {
+    const val = 1 - (i / 5);
+    const y = margin.top + (ph * i) / 5;
+    ctx.fillText((val).toFixed(1), margin.left - 8, y + 4);
+    ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+    ctx.beginPath(); ctx.moveTo(margin.left, y); ctx.lineTo(w - margin.right, y); ctx.stroke();
+  }
+
+  // X轴刻度 (自适应)
+  const xTicks = 8;
+  ctx.textAlign = 'center';
+  for (let i = 0; i <= xTicks; i++) {
+    const val = (maxT * i) / xTicks;
+    const x = margin.left + (pw * i) / xTicks;
+    ctx.fillText(val.toFixed(0), x, h - margin.bottom + 18);
+  }
+
+  // 1/e 阈值线
+  const thresholdY = margin.top + ph * (1 - 1 / Math.E);
+  ctx.setLineDash([6, 4]);
+  ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(margin.left, thresholdY);
+  ctx.lineTo(w - margin.right, thresholdY);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = 'rgba(255,255,255,0.4)';
+  ctx.textAlign = 'left';
+  ctx.fillText('1/e ≈ 37%', w - margin.right - 60, thresholdY - 6);
+
+  // 主衰减曲线
+  const points = [];
+  for (let i = 0; i <= 200; i++) {
+    const t = (maxT * i) / 200;
+    const intensity = MODEL.decayIntensity(t, tau);
+    points.push([t, intensity]);
+  }
+
+  // 渐变填充
+  const grad = ctx.createLinearGradient(margin.left, margin.top, margin.left, h - margin.bottom);
+  grad.addColorStop(0, 'rgba(255,51,68,0.3)');
+  grad.addColorStop(1, 'rgba(255,51,68,0.02)');
+
+  ctx.beginPath();
+  ctx.moveTo(margin.left, h - margin.bottom);
+  for (const [t, I] of points) {
+    const x = margin.left + (t / maxT) * pw;
+    const y = margin.top + (1 - I) * ph;
+    ctx.lineTo(x, y);
+  }
+  ctx.lineTo(margin.left + pw, h - margin.bottom);
+  ctx.closePath();
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // 曲线描边
+  ctx.beginPath();
+  for (const [t, I] of points) {
+    const x = margin.left + (t / maxT) * pw;
+    const y = margin.top + (1 - I) * ph;
+    if (t === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = '#ff4466';
+  ctx.lineWidth = 2.5;
+  ctx.shadowColor = 'rgba(255,68,102,0.6)';
+  ctx.shadowBlur = 12;
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  // 标记 τ 点
+  const tauX = margin.left + (tau / maxT) * pw;
+  const tauY = margin.top + (1 - MODEL.decayIntensity(tau, tau)) * ph;
+  ctx.beginPath();
+  ctx.arc(tauX, tauY, 6, 0, Math.PI * 2);
+  ctx.fillStyle = '#fff';
+  ctx.fill();
+  ctx.strokeStyle = '#ff4466';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // τ标注
+  ctx.fillStyle = '#ff4466';
+  ctx.font = 'bold 12px "PingFang SC", "Microsoft YaHei", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(`τ = ${tau.toFixed(0)} ms`, tauX, tauY - 14);
+
+  // 光照标记 (如果有flash的话)
+  if (isFlashing) {
+    const elapsed = performance.now() - flashStartTime;
+    if (elapsed < maxT) {
+      const markerX = margin.left + (elapsed / maxT) * pw;
+      ctx.beginPath();
+      ctx.moveTo(markerX, margin.top);
+      ctx.lineTo(markerX, h - margin.bottom);
+      ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([3, 5]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // 发光点
+      const markerIntensity = MODEL.decayIntensity(elapsed, tau);
+      const markerY = margin.top + (1 - markerIntensity) * ph;
+      ctx.beginPath();
+      ctx.arc(markerX, markerY, 8, 0, Math.PI * 2);
+      const mGrad = ctx.createRadialGradient(markerX, markerY, 0, markerX, markerY, 16);
+      mGrad.addColorStop(0, 'rgba(255,200,50,0.9)');
+      mGrad.addColorStop(0.4, 'rgba(255,68,50,0.4)');
+      mGrad.addColorStop(1, 'rgba(255,68,50,0)');
+      ctx.fillStyle = mGrad;
+      ctx.fill();
+    }
+  }
+}
+
+// ========== 数据拟合图 ==========
+function drawFittingChart() {
+  const canvas = $('fittingCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width = canvas.offsetWidth * 2;
+  const H = canvas.height = canvas.offsetHeight * 2;
+  ctx.scale(2, 2);
+  const w = W / 2, h = H / 2;
+
+  const margin = { top: 20, right: 40, bottom: 40, left: 55 };
+  const pw = w - margin.left - margin.right;
+  const ph = h - margin.top - margin.bottom;
+
+  ctx.clearRect(0, 0, w, h);
+
+  // 网格
+  ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+  for (let i = 0; i <= 5; i++) {
+    const y = margin.top + (ph * i) / 5;
+    ctx.beginPath(); ctx.moveTo(margin.left, y); ctx.lineTo(w - margin.right, y); ctx.stroke();
+  }
+  for (let i = 0; i <= 10; i++) {
+    const x = margin.left + (pw * i) / 10;
+    ctx.beginPath(); ctx.moveTo(x, margin.top); ctx.lineTo(x, h - margin.bottom); ctx.stroke();
+  }
+
+  // 坐标轴
+  ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(margin.left, margin.top);
+  ctx.lineTo(margin.left, h - margin.bottom);
+  ctx.lineTo(w - margin.right, h - margin.bottom);
+  ctx.stroke();
+
+  ctx.fillStyle = '#a0a0c0';
+  ctx.font = '11px "PingFang SC", "Microsoft YaHei", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('紫外照射时间 (s)', w / 2, h - 6);
+  ctx.save();
+  ctx.translate(14, h / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('余晖持续时间 τ (ms)', 0, 0);
+  ctx.restore();
+
+  // 计算范围
+  const dataMax = 200;
+  const xMax = 12;
+
+  // Y轴
+  ctx.textAlign = 'right';
+  for (let i = 0; i <= 5; i++) {
+    const v = (dataMax * i) / 5;
+    ctx.fillText(v.toFixed(0), margin.left - 8, margin.top + ph - (ph * i) / 5 + 4);
+  }
+
+  // X轴
+  ctx.textAlign = 'center';
+  for (let i = 0; i <= 12; i++) {
+    const x = margin.left + (pw * i) / 12;
+    ctx.fillText(i, x, h - margin.bottom + 18);
+  }
+
+  // 拟合曲线 (当前温度)
+  ctx.beginPath();
+  for (let i = 0; i <= 120; i++) {
+    const t = 0.1 + (xMax - 0.1) * i / 120;
+    const tau = MODEL.calcTau(currentTemp, t);
+    const x = margin.left + (t / xMax) * pw;
+    const y = margin.top + ph - (tau / dataMax) * ph;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = '#ff4466';
+  ctx.lineWidth = 2.5;
+  ctx.shadowColor = 'rgba(255,68,102,0.5)';
+  ctx.shadowBlur = 8;
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  // 实验数据点
+  for (const [t, tau] of MODEL.dataPoints) {
+    const x = margin.left + (t / xMax) * pw;
+    const y = margin.top + ph - (tau / dataMax) * ph;
+
+    // 光晕
+    const g = ctx.createRadialGradient(x, y, 0, x, y, 12);
+    g.addColorStop(0, 'rgba(255,170,51,0.6)');
+    g.addColorStop(1, 'rgba(255,170,51,0)');
+    ctx.beginPath();
+    ctx.arc(x, y, 12, 0, Math.PI * 2);
+    ctx.fillStyle = g;
+    ctx.fill();
+
+    // 点
+    ctx.beginPath();
+    ctx.arc(x, y, 5, 0, Math.PI * 2);
+    ctx.fillStyle = '#ffaa33';
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // 标签
+    ctx.fillStyle = '#ffaa33';
+    ctx.font = 'bold 10px "PingFang SC", "Microsoft YaHei", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(`${tau.toFixed(0)}ms`, x, y - 14);
+  }
+
+  // 当前参数点
+  const curTau = MODEL.calcTau(currentTemp, currentExp);
+  if (currentExp <= xMax) {
+    const cx = margin.left + (currentExp / xMax) * pw;
+    const cy = margin.top + ph - (curTau / dataMax) * ph;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 8, 0, Math.PI * 2);
+    ctx.fillStyle = '#fff';
+    ctx.fill();
+    ctx.strokeStyle = '#ff4466';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.fillStyle = '#ff4466';
+    ctx.fillText(`${curTau.toFixed(0)}ms`, cx, cy - 18);
+  }
+
+  // 误差条
+  ctx.strokeStyle = 'rgba(255,170,51,0.4)';
+  ctx.lineWidth = 1;
+  for (const [t, tau] of MODEL.dataPoints) {
+    const x = margin.left + (t / xMax) * pw;
+    const y = margin.top + ph - (tau / dataMax) * ph;
+    const err = tau * 0.25; // ~25% 变异
+    ctx.beginPath();
+    ctx.moveTo(x, margin.top + ph - ((tau - err) / dataMax) * ph);
+    ctx.lineTo(x, margin.top + ph - ((tau + err) / dataMax) * ph);
+    ctx.stroke();
+  }
+}
+
+// ========== 物理模型图 ==========
+function drawPhysicsModel() {
+  const canvas = $('physicsCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width = canvas.offsetWidth * 2;
+  const H = canvas.height = canvas.offsetHeight * 2;
+  ctx.scale(2, 2);
+  const w = W / 2, h = H / 2;
+
+  ctx.clearRect(0, 0, w, h);
+
+  // 晶体轮廓
+  const cx = w * 0.4, cy = h * 0.5;
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(cx - 80, cy + 100);
+  ctx.lineTo(cx - 20, cy - 80);
+  ctx.lineTo(cx + 100, cy - 60);
+  ctx.lineTo(cx + 80, cy + 80);
+  ctx.lineTo(cx - 20, cy + 100);
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(153,136,255,0.08)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(153,136,255,0.3)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.clip();
+
+  // Mn2+ 离子
+  for (let i = 0; i < 5; i++) {
+    const mx = cx - 40 + Math.random() * 100;
+    const my = cy - 40 + Math.random() * 100;
+    ctx.beginPath();
+    ctx.arc(mx, my, 4, 0, Math.PI * 2);
+    ctx.fillStyle = '#ffaa33';
+    ctx.fill();
+  }
+  ctx.restore();
+
+  // 入射紫光
+  ctx.setLineDash([4, 6]);
+  ctx.strokeStyle = 'rgba(153,68,255,0.6)';
+  ctx.lineWidth = 2;
+  for (let i = 0; i < 3; i++) {
+    const sx = cx - 160 + i * 10;
+    ctx.beginPath();
+    ctx.moveTo(sx, cy - 100 - i * 20);
+    ctx.lineTo(cx - 30, cy - 20 + i * 15);
+    ctx.stroke();
+  }
+  ctx.setLineDash([]);
+
+  // 紫光箭头
+  ctx.fillStyle = '#9944ff';
+  ctx.font = 'bold 14px "PingFang SC", "Microsoft YaHei", sans-serif';
+  ctx.textAlign = 'right';
+  ctx.fillText('UV 紫光', cx - 100, cy - 80);
+  ctx.fillText('(313-436nm)', cx - 100, cy - 60);
+
+  // 出射红光
+  ctx.setLineDash([3, 5]);
+  ctx.strokeStyle = 'rgba(255,51,68,0.6)';
+  ctx.lineWidth = 2.5;
+  for (let i = 0; i < 4; i++) {
+    ctx.beginPath();
+    ctx.moveTo(cx + 30, cy - 30 + i * 20);
+    ctx.lineTo(cx + 160, cy - 100 + i * 25);
+    ctx.stroke();
+  }
+  ctx.setLineDash([]);
+
+  // 红光标注
+  ctx.fillStyle = '#ff4466';
+  ctx.textAlign = 'left';
+  ctx.fillText('Red Afterglow', cx + 100, cy - 70);
+  ctx.fillText('红光余晖 (~590nm)', cx + 100, cy - 50);
+  ctx.fillText(`τ=${MODEL.calcTau(currentTemp,currentExp).toFixed(0)}ms @${currentTemp}°C`, cx + 100, cy - 30);
+
+  // 能级图 (右侧)
+  const ex = w * 0.78;
+  ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+  ctx.lineWidth = 1;
+
+  // 导带
+  ctx.beginPath(); ctx.moveTo(ex - 40, cy - 60); ctx.lineTo(ex + 60, cy - 60); ctx.stroke();
+  ctx.fillStyle = '#a0a0c0';
+  ctx.font = '10px "PingFang SC", "Microsoft YaHei", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('导带 (CB)', ex + 10, cy - 68);
+
+  // 陷阱能级
+  ctx.beginPath();
+  ctx.moveTo(ex - 20, cy - 10);
+  ctx.lineTo(ex + 60, cy - 10);
+  ctx.setLineDash([4, 3]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillText('浅陷阱 (~0.34eV)', ex + 10, cy - 18);
+
+  // Mn2+ 能级
+  ctx.beginPath();
+  ctx.moveTo(ex - 20, cy + 30);
+  ctx.lineTo(ex + 60, cy + 30);
+  ctx.setLineDash([2, 3]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#ffaa33';
+  ctx.fillText('Mn²⁺ 发射中心', ex + 10, cy + 22);
+
+  // 价带
+  ctx.beginPath();
+  ctx.moveTo(ex - 40, cy + 70);
+  ctx.lineTo(ex + 60, cy + 70);
+  ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+  ctx.stroke();
+  ctx.fillStyle = '#a0a0c0';
+  ctx.fillText('价带 (VB)', ex + 10, cy + 84);
+
+  // 跃迁箭头
+  // UV激发: VB -> CB
+  ctx.strokeStyle = '#9944ff';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([3, 3]);
+  ctx.beginPath();
+  ctx.moveTo(ex + 35, cy + 70);
+  ctx.lineTo(ex + 35, cy - 60);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#9944ff';
+  ctx.fillText('hν', ex + 45, cy + 5);
+
+  // 陷阱俘获
+  ctx.strokeStyle = '#ff8844';
+  ctx.beginPath();
+  ctx.moveTo(ex + 50, cy - 55);
+  ctx.lineTo(ex + 50, cy - 10);
+  ctx.stroke();
+  const triSz = 4;
+  ctx.fillStyle = '#ff8844';
+  ctx.beginPath();
+  ctx.moveTo(ex + 50, cy - 10);
+  ctx.lineTo(ex + 50 - triSz, cy - 16);
+  ctx.lineTo(ex + 50 + triSz, cy - 16);
+  ctx.fill();
+
+  // 热释放 + 复合
+  ctx.strokeStyle = '#ff4466';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  // 陷阱->CB
+  ctx.moveTo(ex + 15, cy - 15);
+  ctx.lineTo(ex + 15, cy - 55);
+  ctx.stroke();
+  // CB->Mn2+
+  ctx.beginPath();
+  ctx.moveTo(ex + 25, cy - 55);
+  ctx.lineTo(ex + 25, cy + 25);
+  ctx.stroke();
+
+  // 红光发射
+  ctx.strokeStyle = '#ff4466';
+  ctx.lineWidth = 2;
+  ctx.setLineDash([2, 4]);
+  ctx.beginPath();
+  ctx.moveTo(ex + 25, cy + 35);
+  ctx.lineTo(ex + 25, cy + 65);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillText('红光', ex + 32, cy + 52);
+
+  // 温度指示
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 12px "PingFang SC", "Microsoft YaHei", sans-serif';
+  const tempRatio = Math.exp(MODEL.beta * (currentTemp - 25));
+  ctx.fillText(`热释放速率 ∝ exp(−Ea/kT)`, ex + 10, cy - 30);
+  ctx.fillText(`当前: ${tempRatio.toFixed(1)}× 室温速率`, ex + 10, cy - 42);
+}
+
+// ========== Tab切换 ==========
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.viz-tabs button').forEach((b, i) => {
+    b.classList.toggle('active', ['decay','fitting','model'][i] === tab);
+  });
+  $('tab-decay').style.display = tab === 'decay' ? 'block' : 'none';
+  $('tab-fitting').style.display = tab === 'fitting' ? 'block' : 'none';
+  $('tab-model').style.display = tab === 'model' ? 'block' : 'none';
+
+  requestAnimationFrame(() => {
+    if (tab === 'decay') drawDecayCurve();
+    else if (tab === 'fitting') drawFittingChart();
+    else if (tab === 'model') drawPhysicsModel();
+  });
+}
+
+// ========== 更新显示 ==========
+function updateDisplay() {
+  const tau = MODEL.calcTau(currentTemp, currentExp);
+  $('resultMs').textContent = tau.toFixed(0);
+  $('tempVal').textContent = `${currentTemp}°C`;
+  $('expVal').textContent = `${currentExp} s`;
+  $('wlVal').textContent = `${wlSlider.value} nm`;
+
+  // 更新结果面板颜色 (根据温度)
+  const r = Math.min(255, Math.floor(60 + currentTemp * 3));
+  const g = Math.max(0, Math.floor(80 - currentTemp));
+  const b = Math.max(0, Math.floor(120 - currentTemp * 2));
+  $('resultDisplay').style.borderColor = `rgba(${r},${g},${b},0.3)`;
+
+  // 更新公式
+  const dT = currentTemp - 25;
+  const tempTerm = MODEL.beta * dT;
+  $('eqDisplay').innerHTML =
+    `τ(${currentTemp}°C, ${currentExp}s) = ${MODEL.tau0_ms.toFixed(1)} · ${currentExp}<sup>${MODEL.alpha.toFixed(3)}</sup> · exp(${tempTerm.toFixed(4)}) = <strong style="color:#ff4466">${tau.toFixed(1)} ms</strong>`;
+
+  // 重绘
+  requestAnimationFrame(() => {
+    if (currentTab === 'decay') drawDecayCurve();
+    else if (currentTab === 'fitting') drawFittingChart();
+    else if (currentTab === 'model') drawPhysicsModel();
+  });
+}
+
+// ========== 闪烁动画 ==========
+function triggerFlash() {
+  if (isFlashing) return;
+  isFlashing = true;
+  flashStartTime = performance.now();
+
+  // 闪光效果
+  const flash = document.createElement('div');
+  flash.style.cssText = `
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, rgba(153,68,255,0.3), transparent 70%);
+    pointer-events: none; z-index: 999;
+    transition: opacity 0.8s ease-out;
+  `;
+  document.body.appendChild(flash);
+  requestAnimationFrame(() => {
+    flash.style.opacity = '0';
+    setTimeout(() => flash.remove(), 800);
+  });
+
+  // 短时间后恢复正常
+  setTimeout(() => {
+    isFlashing = false;
+    if (currentTab === 'decay') drawDecayCurve();
+  }, 3000);
+}
+
+function setTemp(t) {
+  tempSlider.value = t;
+  currentTemp = t;
+  updateDisplay();
+}
+
+function resetAll() {
+  currentTemp = 25;
+  currentExp = 5;
+  tempSlider.value = 25;
+  expSlider.value = 5;
+  wlSlider.value = 365;
+  updateDisplay();
+}
+
+// ========== 初始化 ==========
+function init() {
+  initBgParticles();
+  updateDisplay();
+
+  tempSlider.addEventListener('input', () => {
+    currentTemp = parseInt(tempSlider.value);
+    updateDisplay();
+  });
+
+  expSlider.addEventListener('input', () => {
+    currentExp = parseFloat(expSlider.value);
+    updateDisplay();
+  });
+
+  wlSlider.addEventListener('input', () => {
+    $('wlVal').textContent = `${wlSlider.value} nm`;
+  });
+
+  window.addEventListener('resize', () => {
+    requestAnimationFrame(() => {
+      if (currentTab === 'decay') drawDecayCurve();
+      else if (currentTab === 'fitting') drawFittingChart();
+      else if (currentTab === 'model') drawPhysicsModel();
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
