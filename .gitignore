@@ -3,6 +3,8 @@
 *.xlsx
 *.json
 *.png
+!assets/
+!assets/duffy-friends-optics.png
 *.ps1
 *.py
 *.txt
