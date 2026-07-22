@@ -4,240 +4,33 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#fff7fb" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#1d1421" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f4f7fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#08111f" media="(prefers-color-scheme: dark)">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="description" content="光迹——多维光学现象交互研究平台，由姜润扬开发，包含冰洲石红光余晖、旋光散射和 RGB 主波长与光谱分析。">
-  <meta name="author" content="姜润扬">
+  <meta name="description" content="光迹——多维光学现象交互研究平台，包含冰洲石红光余晖、旋光散射和 RGB 主波长与光谱分析。">
   <meta property="og:title" content="光迹——多维光学现象交互研究平台">
-  <meta property="og:description" content="和玲娜贝儿与朋友们一起探索光学世界。">
-  <meta property="og:image" content="https://joselinekopplin-del.github.io/iceland-spar-afterglow/assets/duffy-friends-optics.png">
+  <meta property="og:description" content="三个独立光学课题的交互分析、数据拟合与仿真平台。">
   <meta property="og:type" content="website">
   <title>光迹——多维光学现象交互研究平台｜LumiTrace</title>
-  <script>
-    (() => {
-      const allowed = ["linabell","duffy","shelliemay","gelatoni","stellalou","cookieann","olumel"];
-      let saved = "linabell";
-      try { saved = localStorage.getItem("lumitrace-theme") || saved; } catch {}
-      document.documentElement.dataset.theme = allowed.includes(saved) ? saved : "linabell";
-    })();
-  </script>
   <style>
-:root {
-  color-scheme: light;
-  --font-size-base: 15px;
-  --background: #fff7fb;
-  --foreground: #563a4c;
-  --card: rgba(255,250,253,.86);
-  --card-foreground: #563a4c;
-  --muted: rgba(216,164,198,.18);
-  --muted-foreground: #806777;
-  --primary: #e56ba6;
-  --primary-foreground: #ffffff;
-  --secondary: rgba(240,190,219,.28);
-  --secondary-foreground: #68455b;
-  --accent: rgba(232,105,168,.14);
-  --accent-foreground: #c64585;
-  --destructive: #ff3b30;
-  --border: rgba(174,112,149,.20);
-  --input: rgba(174,112,149,.30);
-  --ring: #e767a4;
-  --viz-series-1: #ef6a9f;
-  --viz-series-2: #f4a45f;
-  --viz-series-3: #8a83df;
-  --viz-series-4: #61bca5;
-  --viz-series-5: #b875d3;
-  --viz-series-6: #6ebfd1;
-  --shadow: rgba(116,63,96,.13);
-  --glass: rgba(255,249,253,.72);
-  --glass-strong: rgba(255,252,254,.92);
-  --theme-glow-a: rgba(255,190,220,.38);
-  --theme-glow-b: rgba(196,174,244,.25);
-  --theme-glow-c: rgba(174,226,215,.18);
-  --theme-accent-a: #f59bc6;
-  --theme-accent-b: #e76da7;
-  --theme-accent-c: #aa80d4;
-  --hero-wash: rgba(255,246,251,.28);
-  --hero-focus: center;
-  --font-ui: "SF Pro Text", "PingFang SC", -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Microsoft YaHei UI", sans-serif;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --background: #1d1421;
-    --foreground: #fff2fa;
-    --card: rgba(55,37,58,.84);
-    --card-foreground: #fff2fa;
-    --muted: rgba(231,151,199,.16);
-    --muted-foreground: #d0b2c5;
-    --primary: #f08ab8;
-    --primary-foreground: #321c2a;
-    --secondary: rgba(231,151,199,.17);
-    --secondary-foreground: #fff2fa;
-    --accent: rgba(240,138,184,.18);
-    --accent-foreground: #ffabd1;
-    --destructive: #ff453a;
-    --border: rgba(255,220,241,.16);
-    --input: rgba(255,220,241,.25);
-    --ring: #f08ab8;
-    --viz-series-1: #ff7f9b;
-    --viz-series-2: #ebb15d;
-    --viz-series-3: #91a7f1;
-    --viz-series-4: #58c2ae;
-    --viz-series-5: #c29be8;
-    --viz-series-6: #7fb4d0;
-    --shadow: rgba(0,0,0,.42);
-    --glass: rgba(48,31,51,.72);
-    --glass-strong: rgba(55,37,58,.92);
-  }
-}
-html[data-theme="linabell"]{color-scheme:light;--background:#fff7fb;--foreground:#563a4c;--card:rgba(255,250,253,.88);--card-foreground:#563a4c;--muted:rgba(216,164,198,.18);--muted-foreground:#806777;--primary:#e56ba6;--secondary:rgba(240,190,219,.28);--accent:rgba(232,105,168,.14);--accent-foreground:#c64585;--border:rgba(174,112,149,.20);--input:rgba(174,112,149,.30);--ring:#e767a4;--shadow:rgba(116,63,96,.13);--glass:rgba(255,249,253,.74);--glass-strong:rgba(255,252,254,.94);--theme-glow-a:rgba(255,168,211,.44);--theme-glow-b:rgba(203,176,247,.28);--theme-glow-c:rgba(255,220,235,.22);--theme-accent-a:#f59bc6;--theme-accent-b:#e76da7;--theme-accent-c:#aa80d4;--hero-wash:rgba(255,236,246,.34);--hero-focus:center}
-html[data-theme="duffy"]{color-scheme:light;--background:#fffaf1;--foreground:#5d4635;--card:rgba(255,252,245,.9);--card-foreground:#5d4635;--muted:rgba(224,183,118,.18);--muted-foreground:#856d58;--primary:#bd814b;--secondary:rgba(238,204,148,.3);--accent:rgba(205,143,77,.15);--accent-foreground:#9b622f;--border:rgba(163,117,73,.22);--input:rgba(163,117,73,.31);--ring:#c68a52;--shadow:rgba(105,75,45,.14);--glass:rgba(255,251,242,.76);--glass-strong:rgba(255,253,248,.95);--theme-glow-a:rgba(245,200,132,.42);--theme-glow-b:rgba(230,176,122,.25);--theme-glow-c:rgba(255,228,174,.24);--theme-accent-a:#e2b87d;--theme-accent-b:#bd814b;--theme-accent-c:#8c5a38;--hero-wash:rgba(255,244,220,.38);--hero-focus:45% center}
-html[data-theme="shelliemay"]{color-scheme:light;--background:#fff8fa;--foreground:#5c3d49;--card:rgba(255,251,252,.9);--card-foreground:#5c3d49;--muted:rgba(219,155,178,.18);--muted-foreground:#846570;--primary:#d07193;--secondary:rgba(238,185,205,.3);--accent:rgba(210,113,147,.14);--accent-foreground:#ae4f73;--border:rgba(166,101,125,.21);--input:rgba(166,101,125,.30);--ring:#d27194;--shadow:rgba(102,56,73,.13);--glass:rgba(255,250,252,.75);--glass-strong:rgba(255,253,254,.95);--theme-glow-a:rgba(245,170,196,.42);--theme-glow-b:rgba(235,196,210,.3);--theme-glow-c:rgba(255,219,229,.2);--theme-accent-a:#eaa7bd;--theme-accent-b:#ce6e91;--theme-accent-c:#a95573;--hero-wash:rgba(255,236,243,.36);--hero-focus:55% center}
-html[data-theme="gelatoni"]{color-scheme:light;--background:#f5fcf8;--foreground:#36574e;--card:rgba(249,255,252,.9);--card-foreground:#36574e;--muted:rgba(130,199,173,.18);--muted-foreground:#5e7e74;--primary:#57a98d;--secondary:rgba(168,222,201,.3);--accent:rgba(87,169,141,.14);--accent-foreground:#33846a;--border:rgba(77,139,117,.21);--input:rgba(77,139,117,.30);--ring:#54aa8d;--shadow:rgba(45,94,77,.13);--glass:rgba(247,255,251,.76);--glass-strong:rgba(251,255,253,.95);--theme-glow-a:rgba(136,218,188,.38);--theme-glow-b:rgba(173,225,205,.28);--theme-glow-c:rgba(183,220,246,.2);--theme-accent-a:#8bd2b7;--theme-accent-b:#50a789;--theme-accent-c:#4d8eb0;--hero-wash:rgba(229,250,242,.35);--hero-focus:62% center}
-html[data-theme="stellalou"]{color-scheme:light;--background:#faf7ff;--foreground:#4d4164;--card:rgba(252,250,255,.9);--card-foreground:#4d4164;--muted:rgba(171,149,222,.18);--muted-foreground:#746887;--primary:#9279d1;--secondary:rgba(204,190,239,.31);--accent:rgba(146,121,209,.14);--accent-foreground:#7156b7;--border:rgba(119,96,174,.2);--input:rgba(119,96,174,.29);--ring:#9279d1;--shadow:rgba(76,58,118,.13);--glass:rgba(251,248,255,.76);--glass-strong:rgba(253,251,255,.95);--theme-glow-a:rgba(190,167,245,.42);--theme-glow-b:rgba(220,186,247,.28);--theme-glow-c:rgba(168,202,249,.2);--theme-accent-a:#bba5ed;--theme-accent-b:#9177d1;--theme-accent-c:#6757ae;--hero-wash:rgba(243,237,255,.38);--hero-focus:72% center}
-html[data-theme="cookieann"]{color-scheme:light;--background:#fffaf0;--foreground:#5f4b31;--card:rgba(255,253,246,.91);--card-foreground:#5f4b31;--muted:rgba(233,191,103,.18);--muted-foreground:#887458;--primary:#d99b39;--secondary:rgba(247,214,147,.32);--accent:rgba(217,155,57,.15);--accent-foreground:#ae721a;--border:rgba(173,127,54,.21);--input:rgba(173,127,54,.3);--ring:#d99b39;--shadow:rgba(111,82,36,.13);--glass:rgba(255,252,242,.77);--glass-strong:rgba(255,254,249,.96);--theme-glow-a:rgba(255,207,108,.4);--theme-glow-b:rgba(255,225,161,.3);--theme-glow-c:rgba(243,184,113,.18);--theme-accent-a:#f2c76d;--theme-accent-b:#d99b39;--theme-accent-c:#b36b30;--hero-wash:rgba(255,245,217,.4);--hero-focus:55% center}
-html[data-theme="olumel"]{color-scheme:light;--background:#f3fcfb;--foreground:#315b58;--card:rgba(248,255,254,.9);--card-foreground:#315b58;--muted:rgba(101,194,185,.18);--muted-foreground:#587e7b;--primary:#3ca89e;--secondary:rgba(153,222,215,.3);--accent:rgba(60,168,158,.14);--accent-foreground:#198279;--border:rgba(45,132,124,.21);--input:rgba(45,132,124,.3);--ring:#3ca89e;--shadow:rgba(35,91,86,.13);--glass:rgba(246,255,254,.77);--glass-strong:rgba(251,255,255,.96);--theme-glow-a:rgba(96,211,199,.38);--theme-glow-b:rgba(130,194,230,.27);--theme-glow-c:rgba(179,229,219,.22);--theme-accent-a:#74d0c5;--theme-accent-b:#39a79c;--theme-accent-c:#428db9;--hero-wash:rgba(225,250,247,.38);--hero-focus:78% center}
-* { box-sizing: border-box; }
-html { min-width: 320px; scroll-behavior:smooth; background:var(--background); }
-body {
-  margin: 0;
-  min-height: 100vh;
-  color: var(--foreground);
-  background:radial-gradient(circle at 8% 5%,var(--theme-glow-a),transparent 31rem),radial-gradient(circle at 92% 18%,var(--theme-glow-b),transparent 30rem),radial-gradient(circle at 52% 85%,var(--theme-glow-c),transparent 40rem),var(--background);
-  transition:color .45s ease,background-color .45s ease;
-  font:400 var(--font-size-base)/1.55 var(--font-ui);
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
-}
-button,input,select,textarea,code,output{font-family:var(--font-ui);font-feature-settings:"kern" 1,"tnum" 1;font-variant-numeric:tabular-nums}
-.ambient{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:-1}
-.orb{position:absolute;width:34rem;aspect-ratio:1;border-radius:50%;filter:blur(80px);opacity:.15;animation:float 14s ease-in-out infinite alternate}
-.orb-a{background:var(--theme-accent-a);left:-18rem;top:8rem}.orb-b{background:var(--theme-accent-c);right:-20rem;top:28rem;animation-delay:-7s}
-.app-shell { width: min(1220px, calc(100% - 40px)); margin: 0 auto; padding: max(18px,env(safe-area-inset-top)) 0 max(44px,env(safe-area-inset-bottom)); }
-.app-header { position:sticky;top:12px;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:26px;padding:10px 12px;border:1px solid var(--border);border-radius:20px;background:var(--glass);box-shadow:0 12px 40px var(--shadow);backdrop-filter:saturate(180%) blur(24px);-webkit-backdrop-filter:saturate(180%) blur(24px);animation:rise .65s cubic-bezier(.22,1,.36,1) both; }
-.brand { display: flex; align-items: center; gap: 13px; min-width: 0; }
-.brand-mark { display:grid;place-items:center;width:44px;height:44px;flex:0 0 auto;border-radius:50% 50% 46% 54%;color:#fff;background:linear-gradient(145deg,var(--theme-accent-a),var(--theme-accent-b) 58%,var(--theme-accent-c));box-shadow:0 9px 24px color-mix(in srgb,var(--primary) 34%,transparent);transform:rotate(-4deg);transition:background .45s ease,box-shadow .45s ease }
-.brand-symbol{font-size:1.35rem;font-weight:650;letter-spacing:-.08em}
-.brand h1 { margin:0;font-family:var(--font-ui);font-size:clamp(1.12rem,2.4vw,1.45rem);font-weight:650;letter-spacing:-.035em; }
-.brand p { margin: 2px 0 0; color: var(--muted-foreground); }
-.app-status { display:inline-flex;align-items:center;gap:7px;white-space:nowrap;padding:7px 11px;border:1px solid var(--border);border-radius:999px;color:var(--muted-foreground);background:var(--glass-strong);font-size:.82rem; }
-.status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--viz-series-4); box-shadow: 0 0 0 4px color-mix(in srgb, var(--viz-series-4) 14%, transparent); }
-.hero{position:relative;display:flex;align-items:flex-end;min-height:clamp(520px,66vw,700px);overflow:hidden;margin:8px 0 22px;padding:clamp(24px,4vw,48px);border:1px solid rgba(255,255,255,.7);border-radius:38px;background-image:linear-gradient(90deg,var(--hero-wash),transparent 58%),url('assets/duffy-friends-optics.png');background-size:cover;background-position:var(--hero-focus);box-shadow:0 28px 80px var(--shadow),inset 0 1px rgba(255,255,255,.8);animation:rise .75s .08s cubic-bezier(.22,1,.36,1) both;transition:background-position .65s cubic-bezier(.22,1,.36,1),box-shadow .45s ease}
-.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(94,53,79,.12));pointer-events:none}
-.hero-copy-card{position:relative;z-index:1;width:min(540px,100%);padding:clamp(20px,3vw,32px);color:#563a4c;border:1px solid rgba(255,255,255,.72);border-radius:30px;background:rgba(255,250,253,.79);box-shadow:0 18px 55px rgba(106,55,88,.18);backdrop-filter:blur(24px) saturate(145%);-webkit-backdrop-filter:blur(24px) saturate(145%)}
-.hero-copy-card .eyebrow{color:#c64585}.hero-copy-card .hero-project-name{color:#563a4c}.hero-copy-card .hero-copy{color:#765d6c}
-.eyebrow{margin:0 0 12px;color:var(--accent-foreground);font-size:.78rem;font-weight:650;letter-spacing:.13em;text-transform:uppercase}
-.hero h2{max-width:820px;margin:0;font-family:var(--font-ui);font-size:clamp(3rem,7.4vw,5.8rem);line-height:.94;font-weight:720;letter-spacing:-.065em;background:linear-gradient(120deg,var(--foreground) 10%,var(--theme-accent-b) 58%,var(--theme-accent-c));-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero-project-name{margin:14px 0 0;font-size:clamp(1.25rem,2.7vw,2.1rem);font-weight:630;letter-spacing:-.035em;color:var(--foreground)}
-.hero-copy{max-width:720px;margin:22px 0 0;color:var(--muted-foreground);font-size:clamp(1rem,1.8vw,1.25rem);letter-spacing:-.012em}
-.friends-section{margin:0 0 26px;padding:clamp(18px,3vw,28px);border:1px solid var(--border);border-radius:30px;background:var(--glass);box-shadow:0 20px 60px var(--shadow);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);animation:rise .8s .14s cubic-bezier(.22,1,.36,1) both}
-.friends-head{display:grid;grid-template-columns:1fr minmax(230px,.45fr);align-items:end;gap:22px;margin-bottom:18px}.friends-head h3{margin:3px 0 0;font-size:clamp(1.65rem,3vw,2.45rem);line-height:1.05;letter-spacing:-.045em}.friends-head p{margin:0;color:var(--muted-foreground)}
-.author-card{position:relative;overflow:hidden;padding:17px 18px;border:1px solid var(--border);border-radius:20px;background:linear-gradient(145deg,var(--glass-strong),color-mix(in srgb,var(--theme-glow-a) 55%,transparent));box-shadow:0 12px 32px var(--shadow)}
-.author-card::after{content:"♡";position:absolute;right:13px;bottom:-16px;color:rgba(229,107,166,.14);font-size:5rem;font-weight:700;line-height:1;pointer-events:none}
-.theme-current{display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:7px 11px;border:1px solid var(--border);border-radius:999px;color:var(--muted-foreground);background:var(--glass-strong);font-size:.82rem}.theme-current strong{color:var(--accent-foreground)}
-.friends-grid{display:grid;grid-template-columns:repeat(7,minmax(100px,1fr));gap:10px}.friend-card{appearance:none;position:relative;display:grid;place-items:center;gap:7px;min-height:118px;padding:14px 8px;color:#563a4c;border:1px solid rgba(255,255,255,.78);border-radius:22px;background:var(--friend-bg,#fff1f7);box-shadow:0 8px 22px rgba(116,63,96,.10);text-align:center;cursor:pointer;transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s ease,outline-color .3s ease}.friend-card:hover{transform:translateY(-5px) rotate(var(--tilt,-1deg));box-shadow:0 14px 28px rgba(116,63,96,.16)}.friend-card:active{transform:translateY(-1px) scale(.97)}.friend-card:focus-visible{outline:3px solid color-mix(in srgb,var(--ring) 52%,transparent);outline-offset:3px}.friend-card strong{font-size:.92rem}.friend-card small{color:#806777;font-size:.72rem}.friend-spark{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.72);font-size:1.45rem;box-shadow:inset 0 1px rgba(255,255,255,.9)}.friend-card[aria-pressed="true"]{outline:3px solid color-mix(in srgb,var(--primary) 48%,transparent);box-shadow:0 16px 34px color-mix(in srgb,var(--primary) 22%,transparent);transform:translateY(-5px)}.friend-card[aria-pressed="true"]::after{content:"✓";position:absolute;right:10px;top:9px;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;color:white;background:var(--primary);font-size:.78rem;font-weight:800;box-shadow:0 4px 12px color-mix(in srgb,var(--primary) 36%,transparent)}
-.author-label{display:block;color:var(--muted-foreground);font-size:.78rem;margin-bottom:8px}.author-name{display:block;font-size:1.45rem;font-weight:650;letter-spacing:-.03em}.author-affiliation{display:block;margin-top:7px;color:var(--muted-foreground);font-size:.9rem}
-.app-main { padding:clamp(14px,2.3vw,28px);border:1px solid var(--border);border-radius:30px;background:var(--glass);box-shadow:0 28px 80px var(--shadow);backdrop-filter:saturate(165%) blur(28px);-webkit-backdrop-filter:saturate(165%) blur(28px);animation:rise .8s .15s cubic-bezier(.22,1,.36,1) both; }
-.app-footer { display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:18px 4px 0;padding:18px 4px;color:var(--muted-foreground);font-size:.84rem;border-top:1px solid var(--border); }
-.card { position:relative;padding:18px;color:var(--card-foreground);background:linear-gradient(155deg,color-mix(in srgb,var(--card) 96%,white),var(--card));border:1px solid var(--border);border-radius:20px;box-shadow:0 12px 36px var(--shadow),inset 0 1px color-mix(in srgb,white 58%,transparent);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s ease; }
-.card:hover{transform:translateY(-2px);box-shadow:0 18px 48px var(--shadow)}
-.viz-grid { display: grid; gap: 12px; }
-.viz-stat { display: grid; gap: 4px; }
-.viz-stat-value { font-size:1.55rem;font-weight:620;letter-spacing:-.035em;font-variant-numeric:tabular-nums; }
-.viz-badge { display:inline-flex;width:fit-content;margin-bottom:8px;padding:5px 10px;border-radius:999px;color:var(--accent-foreground);background:var(--accent);font-size:.78rem;font-weight:600; }
-.text-small { font-size: .86rem; }
-.text-muted { color: var(--muted-foreground); }
-.form-label { color: var(--foreground); }
-.form-control, .form-select {
-  width: 100%;
-  padding: 11px 12px;
-  color: var(--foreground);
-  background: var(--card);
-  border: 1px solid var(--input);
-  border-radius: 12px;
-  outline: none;
-}
-.form-range{width:100%;height:28px;accent-color:var(--viz-series-3);cursor:pointer}
-.form-range::-webkit-slider-runnable-track{height:6px;border-radius:999px;background:color-mix(in srgb,var(--viz-series-3) 30%,var(--muted))}
-.form-range::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;margin-top:-8px;border:1px solid rgba(0,0,0,.08);border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.24),0 0 0 1px rgba(255,255,255,.7);transition:transform .2s cubic-bezier(.22,1,.36,1)}
-.form-range:active::-webkit-slider-thumb{transform:scale(1.12)}
-.form-control:focus, .form-select:focus, .form-range:focus-visible { border-color: var(--ring); outline: 3px solid color-mix(in srgb, var(--ring) 25%, transparent); outline-offset: 1px; }
-.btn {
-  appearance: none;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 10px 15px;
-  color: var(--secondary-foreground);
-  background: var(--secondary);
-  cursor: pointer;
-  font-weight:560;
-  transition:transform .28s cubic-bezier(.22,1,.36,1),background-color .2s ease,border-color .2s ease,box-shadow .2s ease;
-}
-.btn:hover { transform:translateY(-2px);border-color:var(--input);box-shadow:0 8px 20px var(--shadow); }
-.btn:active{transform:scale(.965)}
-.btn:focus-visible { outline: 3px solid color-mix(in srgb, var(--ring) 40%, transparent); outline-offset: 2px; }
-.btn-primary{color:#fff;background:linear-gradient(180deg,var(--theme-accent-a),var(--theme-accent-b));border-color:var(--primary);box-shadow:0 8px 20px color-mix(in srgb,var(--primary) 30%,transparent)}
-.btn[aria-selected="true"]{color:var(--foreground);background:var(--glass-strong);border-color:color-mix(in srgb,var(--border) 65%,white);box-shadow:0 2px 9px var(--shadow),inset 0 1px color-mix(in srgb,white 72%,transparent)}
-#opticsWorkbenchLite .owl-tabs { position:sticky;top:88px;z-index:12;padding:5px;border:1px solid var(--border);border-radius:17px;background:color-mix(in srgb,var(--muted) 76%,var(--glass));box-shadow:0 10px 30px var(--shadow),inset 0 1px color-mix(in srgb,white 40%,transparent);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px); }
-#opticsWorkbenchLite .owl-tabs .btn { flex: 1 1 280px; }
-#opticsWorkbenchLite .owl-steps { padding:5px;border:1px solid var(--border);border-radius:15px;background:color-mix(in srgb,var(--muted) 82%,transparent);box-shadow:inset 0 1px 2px color-mix(in srgb,var(--shadow) 42%,transparent); }
-#opticsWorkbenchLite .owl-plot { border-radius:18px;background:color-mix(in srgb,var(--muted) 45%,transparent); }
-#opticsWorkbenchLite .owl-result { padding:12px 14px;border-inline-start:3px solid var(--viz-series-4);border-radius:0 14px 14px 0;background:color-mix(in srgb,var(--muted) 62%,transparent); }
-#opticsWorkbenchLite .owl-crystal { border-radius:10px;transition:opacity .12s linear,transform .4s cubic-bezier(.22,1,.36,1); }
-#opticsWorkbenchLite section[role="tabpanel"]:not([hidden]){animation:panelIn .46s cubic-bezier(.22,1,.36,1) both}
-#opticsWorkbenchLite [data-rgb-panel]:not([hidden]),#opticsWorkbenchLite [data-owl-panel]:not([hidden]){animation:panelIn .38s cubic-bezier(.22,1,.36,1) both}
-@keyframes rise{from{opacity:0;transform:translateY(20px) scale(.985)}to{opacity:1;transform:none}}
-@keyframes panelIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-@keyframes float{to{transform:translate3d(45px,-36px,0) scale(1.08)}}
-@media (max-width: 680px) {
-  .app-shell { width:min(100% - 20px,1220px);padding-top:10px; }
-  .app-header { align-items: flex-start; }
-  .app-status { display: none; }
-  .hero{min-height:620px;padding:14px;background-position:62% center;border-radius:28px}.hero h2{font-size:clamp(2.6rem,15vw,4.35rem)}.hero-copy-card{padding:20px;border-radius:24px}
-  .friends-head{grid-template-columns:1fr}.author-card{padding:16px;border-radius:20px}.friends-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.friend-card[data-theme-choice="linabell"]{grid-column:span 2}
-  .app-main { padding:12px;border-radius:24px; }
-  .brand p { display: none; }
-  #opticsWorkbenchLite .owl-tabs{top:76px}
-}
-@media (max-width:420px){.app-header{top:6px;border-radius:17px}.brand-mark{width:40px;height:40px}.hero{padding-top:36px}.app-footer{display:grid}.card:hover{transform:none}}
-@media (prefers-reduced-motion: reduce) {html{scroll-behavior:auto}.btn,.card,#opticsWorkbenchLite .owl-crystal{transition:none}.orb,.app-header,.hero,.app-main,#opticsWorkbenchLite section[role="tabpanel"]:not([hidden]),#opticsWorkbenchLite [data-rgb-panel]:not([hidden]),#opticsWorkbenchLite [data-owl-panel]:not([hidden]){animation:none} }
+:root{color-scheme:light;--font-size-base:15px;--font-ui:"SF Pro Text","PingFang SC","Helvetica Neue",Arial,sans-serif;--background:#f4f7fb;--foreground:#132238;--card:rgba(255,255,255,.92);--card-foreground:#132238;--popover:#fff;--popover-foreground:#132238;--primary:#155eef;--primary-foreground:#fff;--secondary:#eef3fb;--secondary-foreground:#17345d;--muted:#e9eff8;--muted-foreground:#5d6f87;--accent:#e4edff;--accent-foreground:#174ea6;--destructive:#b42318;--border:rgba(32,71,121,.16);--input:rgba(32,71,121,.26);--ring:#2e6cf6;--glass:rgba(250,252,255,.82);--shadow:rgba(21,54,93,.11);--viz-series-1:#2563eb;--viz-series-2:#7c3aed;--viz-series-3:#0891b2;--viz-series-4:#0f9f78;--viz-series-5:#e17a11;--viz-series-6:#c33667}
+@media(prefers-color-scheme:dark){:root{color-scheme:dark;--background:#08111f;--foreground:#ecf4ff;--card:rgba(16,31,51,.92);--card-foreground:#ecf4ff;--popover:#102039;--popover-foreground:#ecf4ff;--primary:#6ea1ff;--primary-foreground:#07101e;--secondary:#172b45;--secondary-foreground:#deebfb;--muted:#15273e;--muted-foreground:#a6b7cd;--accent:#183664;--accent-foreground:#cfe0ff;--border:rgba(172,202,239,.17);--input:rgba(172,202,239,.28);--ring:#79a8ff;--glass:rgba(10,22,38,.84);--shadow:rgba(0,0,0,.32)}}
+*{box-sizing:border-box}html{min-width:320px;scroll-behavior:smooth;background:var(--background)}body{margin:0;min-height:100vh;color:var(--foreground);background:radial-gradient(circle at 8% 0%,color-mix(in srgb,var(--viz-series-1) 13%,transparent),transparent 32rem),radial-gradient(circle at 95% 12%,color-mix(in srgb,var(--viz-series-2) 10%,transparent),transparent 30rem),var(--background);font:400 var(--font-size-base)/1.58 var(--font-ui);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}button,input,select,textarea,code,output{font-family:var(--font-ui);font-feature-settings:"kern" 1,"tnum" 1;font-variant-numeric:tabular-nums}
+.app-shell{width:min(1220px,calc(100% - 40px));margin:0 auto;padding:max(18px,env(safe-area-inset-top)) 0 max(42px,env(safe-area-inset-bottom))}.app-header{position:sticky;top:12px;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px;padding:10px 12px;border:1px solid var(--border);border-radius:18px;background:var(--glass);box-shadow:0 12px 38px var(--shadow);backdrop-filter:blur(24px) saturate(160%)}.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{display:grid;place-items:center;width:44px;height:44px;flex:0 0 auto;border-radius:13px;color:#fff;background:linear-gradient(145deg,var(--viz-series-1),var(--viz-series-2));box-shadow:0 8px 22px color-mix(in srgb,var(--viz-series-1) 28%,transparent)}.brand-mark span{font-size:1.3rem;font-weight:500}.brand h1{margin:0;font-size:clamp(1.08rem,2.4vw,1.42rem);font-weight:500;letter-spacing:-.035em}.brand p{margin:1px 0 0;color:var(--muted-foreground);font-size:.84rem}
+.header-actions{display:flex;align-items:center;gap:8px}.app-status{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;color:var(--muted-foreground);font-size:.82rem}.status-dot{width:7px;height:7px;border-radius:50%;background:var(--viz-series-4);box-shadow:0 0 0 4px color-mix(in srgb,var(--viz-series-4) 14%,transparent)}.team-menu{position:relative}.team-menu>summary{list-style:none;cursor:pointer;padding:8px 12px;border:1px solid var(--border);border-radius:11px;background:var(--secondary);color:var(--secondary-foreground);font-weight:500}.team-menu>summary::-webkit-details-marker{display:none}.team-panel{position:absolute;right:0;top:calc(100% + 10px);width:min(340px,calc(100vw - 28px));padding:16px;border:1px solid var(--border);border-radius:16px;background:var(--popover);color:var(--popover-foreground);box-shadow:0 20px 55px var(--shadow)}.team-panel h2{margin:0 0 12px;font-size:1rem;font-weight:500}.team-list{display:grid;gap:10px}.team-person{display:grid;grid-template-columns:3.6rem 1fr;gap:10px;padding-top:10px;border-top:1px solid var(--border)}.team-person:first-child{padding-top:0;border-top:0}.team-role{color:var(--muted-foreground);font-size:.82rem}.team-person strong{display:block;font-weight:500}.team-person span:last-child{color:var(--muted-foreground);font-size:.86rem}
+.hero{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);align-items:center;gap:clamp(28px,6vw,80px);min-height:410px;overflow:hidden;margin:0 0 24px;padding:clamp(30px,5.4vw,68px);border:1px solid var(--border);border-radius:30px;background:linear-gradient(145deg,color-mix(in srgb,var(--card) 94%,transparent),color-mix(in srgb,var(--accent) 66%,transparent));box-shadow:0 26px 75px var(--shadow)}.hero::before{content:"";position:absolute;inset:-30%;z-index:-2;background:conic-gradient(from 210deg at 68% 45%,transparent 0 12%,color-mix(in srgb,var(--viz-series-1) 20%,transparent) 17%,transparent 25% 48%,color-mix(in srgb,var(--viz-series-2) 16%,transparent) 55%,transparent 62%);filter:blur(28px)}.eyebrow{margin:0 0 12px;color:var(--accent-foreground);font-size:.78rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase}.hero h2{margin:0;font-size:clamp(3rem,8vw,6rem);line-height:.94;font-weight:500;letter-spacing:-.07em;background:linear-gradient(120deg,var(--foreground),var(--viz-series-1) 60%,var(--viz-series-2));-webkit-background-clip:text;background-clip:text;color:transparent}.hero-project-name{margin:14px 0 0;font-size:clamp(1.3rem,2.8vw,2.2rem);font-weight:500;letter-spacing:-.04em}.hero-copy{max-width:660px;margin:18px 0 0;color:var(--muted-foreground);font-size:clamp(1rem,1.6vw,1.16rem)}.optical-orbit{position:relative;width:min(330px,100%);aspect-ratio:1;margin:auto;border:1px solid color-mix(in srgb,var(--viz-series-1) 24%,transparent);border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--viz-series-1) 18%,transparent) 0 8%,transparent 9% 26%,color-mix(in srgb,var(--viz-series-2) 12%,transparent) 27% 28%,transparent 29% 48%,color-mix(in srgb,var(--viz-series-3) 14%,transparent) 49% 50%,transparent 51%);box-shadow:inset 0 0 80px color-mix(in srgb,var(--viz-series-1) 12%,transparent),0 0 70px color-mix(in srgb,var(--viz-series-2) 10%,transparent)}.optical-orbit::before,.optical-orbit::after{content:"";position:absolute;inset:16%;border:2px solid color-mix(in srgb,var(--viz-series-1) 48%,transparent);border-radius:50%;transform:rotate(52deg) scaleY(.36)}.optical-orbit::after{border-color:color-mix(in srgb,var(--viz-series-2) 46%,transparent);transform:rotate(-42deg) scaleY(.46)}.optical-core{position:absolute;left:50%;top:50%;width:52px;height:52px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--viz-series-1) 35%,var(--viz-series-2));box-shadow:0 0 38px color-mix(in srgb,var(--viz-series-1) 55%,transparent)}
+.app-main{padding:clamp(14px,2.4vw,28px);border:1px solid var(--border);border-radius:26px;background:var(--glass);box-shadow:0 26px 72px var(--shadow);backdrop-filter:blur(24px)}.app-footer{margin:18px 4px 0;padding:18px 4px;color:var(--muted-foreground);font-size:.84rem;border-top:1px solid var(--border)}.card{position:relative;padding:18px;color:var(--card-foreground);background:var(--card);border:1px solid var(--border);border-radius:18px;box-shadow:0 10px 32px var(--shadow)}.viz-grid{display:grid;gap:12px}.viz-stat{display:grid;gap:4px}.viz-stat-value{font-size:1.5rem;font-weight:500;letter-spacing:-.035em;font-variant-numeric:tabular-nums}.viz-badge{display:inline-flex;width:fit-content;margin-bottom:8px;padding:5px 10px;border-radius:999px;color:var(--accent-foreground);background:var(--accent);font-size:.78rem;font-weight:500}.text-small{font-size:.86rem}.text-muted{color:var(--muted-foreground)}.form-label{color:var(--foreground)}.form-control,.form-select{width:100%;padding:10px 11px;color:var(--foreground);background:var(--card);border:1px solid var(--input);border-radius:10px;outline:none}.form-range{width:100%;height:28px;accent-color:var(--viz-series-1);cursor:pointer}.form-control:focus,.form-select:focus,.form-range:focus-visible{border-color:var(--ring);outline:3px solid color-mix(in srgb,var(--ring) 22%,transparent);outline-offset:1px}.btn{appearance:none;border:1px solid var(--border);border-radius:10px;padding:9px 14px;color:var(--secondary-foreground);background:var(--secondary);cursor:pointer;font-weight:500;transition:transform .18s ease,box-shadow .18s ease}.btn:hover{transform:translateY(-1px);box-shadow:0 7px 18px var(--shadow)}.btn:focus-visible{outline:3px solid color-mix(in srgb,var(--ring) 35%,transparent);outline-offset:2px}.btn-primary{color:var(--primary-foreground);background:var(--primary);border-color:var(--primary)}.btn[aria-selected="true"]{color:var(--primary-foreground);background:var(--primary);border-color:var(--primary)}
+#opticsWorkbenchLite .owl-tabs{position:sticky;top:84px;z-index:12;padding:5px;border:1px solid var(--border);border-radius:14px;background:color-mix(in srgb,var(--glass) 94%,transparent);box-shadow:0 9px 28px var(--shadow);backdrop-filter:blur(22px)}#opticsWorkbenchLite .owl-tabs .btn{flex:1 1 280px}#opticsWorkbenchLite .owl-steps{padding:5px;border:1px solid var(--border);border-radius:13px;background:color-mix(in srgb,var(--muted) 78%,transparent)}#opticsWorkbenchLite .owl-plot{border-radius:16px;background:color-mix(in srgb,var(--muted) 45%,transparent)}#opticsWorkbenchLite .owl-result{padding:11px 13px;border-inline-start:3px solid var(--viz-series-1);border-radius:0 12px 12px 0;background:color-mix(in srgb,var(--muted) 60%,transparent)}#opticsWorkbenchLite .owl-crystal{border-radius:9px;transition:opacity .12s linear,transform .4s ease}
+@media(max-width:760px){.app-shell{width:min(100% - 20px,1220px);padding-top:10px}.app-header{top:7px}.app-status{display:none}.hero{grid-template-columns:1fr;min-height:auto;padding:30px 22px}.optical-orbit{width:min(250px,72vw)}.brand p{display:none}.app-main{padding:12px}#opticsWorkbenchLite .owl-tabs{top:72px}}@media(max-width:440px){.header-actions{gap:5px}.brand-mark{width:40px;height:40px}.team-menu>summary{padding:8px 9px}.hero h2{font-size:3.4rem}.team-panel{position:fixed;right:10px;top:72px}.card{padding:14px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,#opticsWorkbenchLite .owl-crystal{transition:none}}
 </style>
 </head>
 <body>
-  <div class="ambient" aria-hidden="true"><span class="orb orb-a"></span><span class="orb orb-b"></span></div>
   <div class="app-shell">
     <header class="app-header">
-      <div class="brand">
-        <div class="brand-mark" aria-hidden="true"><span class="brand-symbol">λ</span></div>
-        <div><h1>光迹 · LumiTrace</h1><p>多维光学现象交互研究平台</p></div>
-      </div>
-      <div class="app-status"><span class="status-dot"></span>离线单文件 · 数据本地处理</div>
+      <div class="brand"><div class="brand-mark" aria-hidden="true"><span>λ</span></div><div><h1>光迹 · LumiTrace</h1><p>多维光学现象交互研究平台</p></div></div>
+      <div class="header-actions"><span class="app-status"><span class="status-dot"></span>离线计算 · 数据留在本机</span><details class="team-menu"><summary>关于团队</summary><div class="team-panel"><h2>项目团队</h2><div class="team-list"><div class="team-person"><span class="team-role">作者</span><div><strong>姜润扬</strong><span>华东师范大学物理学院 · 深圳零一学院</span></div></div><div class="team-person"><span class="team-role">组员</span><div><strong>韩旭熙</strong><span>南昌大学</span></div></div><div class="team-person"><span class="team-role">组员</span><div><strong>尹相儒</strong><span>大连理工大学</span></div></div></div></div></details></div>
     </header>
-    <section class="hero" aria-labelledby="heroTitle">
-      <div class="hero-copy-card">
-        <p class="eyebrow" lang="en">LumiTrace — Interactive Optical Research Platform</p>
-        <h2 id="heroTitle">光迹</h2>
-        <p class="hero-project-name">多维光学现象交互研究平台</p>
-        <p class="hero-copy">和玲娜贝儿与她的朋友们一起，从冰洲石红光余晖到旋光散射，再到 RGB 主波长与光谱重建，在梦幻光学花园里发现光的秘密。</p>
-      </div>
-    </section>
-    <section class="friends-section" aria-labelledby="friendsTitle">
-      <div class="friends-head">
-        <div><span class="viz-badge" lang="en">Choose Your Theme</span><h3 id="friendsTitle">选择你的朋友主题</h3><p>点击任意一位朋友，即刻切换整个平台的色彩、光效与主题氛围。</p><span class="theme-current" aria-live="polite">当前主题：<strong id="themeName">玲娜贝儿</strong></span></div>
-        <aside class="author-card" aria-label="作者信息"><span class="author-label" lang="en">Designed &amp; Developed by</span><strong class="author-name">姜润扬</strong><span class="author-affiliation">华东师范大学物理学院 · 深圳零一学院</span></aside>
-      </div>
-      <div class="friends-grid" role="group" aria-label="网页主题选择">
-        <button class="friend-card" type="button" data-theme-choice="linabell" aria-pressed="true" aria-label="切换为玲娜贝儿主题" style="--friend-bg:#ffe6f1"><span class="friend-spark">🦊</span><strong>玲娜贝儿</strong><small>好奇心研究员</small></button>
-        <button class="friend-card" type="button" data-theme-choice="duffy" aria-pressed="false" aria-label="切换为达菲主题" style="--friend-bg:#fff1dc;--tilt:1deg"><span class="friend-spark">🐻</span><strong>达菲</strong><small>温暖实验伙伴</small></button>
-        <button class="friend-card" type="button" data-theme-choice="shelliemay" aria-pressed="false" aria-label="切换为雪莉玫主题" style="--friend-bg:#f8e5ed"><span class="friend-spark">🎀</span><strong>雪莉玫</strong><small>细心记录员</small></button>
-        <button class="friend-card" type="button" data-theme-choice="gelatoni" aria-pressed="false" aria-label="切换为杰拉多尼主题" style="--friend-bg:#e8f4ed;--tilt:1deg"><span class="friend-spark">🎨</span><strong>杰拉多尼</strong><small>光谱艺术家</small></button>
-        <button class="friend-card" type="button" data-theme-choice="stellalou" aria-pressed="false" aria-label="切换为星黛露主题" style="--friend-bg:#eee6ff"><span class="friend-spark">🐰</span><strong>星黛露</strong><small>星光观察员</small></button>
-        <button class="friend-card" type="button" data-theme-choice="cookieann" aria-pressed="false" aria-label="切换为可琦安主题" style="--friend-bg:#fff0d6;--tilt:1deg"><span class="friend-spark">🍪</span><strong>可琦安</strong><small>灵感发明家</small></button>
-        <button class="friend-card" type="button" data-theme-choice="olumel" aria-pressed="false" aria-label="切换为奥乐米拉主题" style="--friend-bg:#e4f5ed"><span class="friend-spark">🎵</span><strong>奥乐米拉</strong><small>节奏探索家</small></button>
-      </div>
-    </section>
+    <section class="hero" aria-labelledby="heroTitle"><div><p class="eyebrow" lang="en">LumiTrace — Interactive Optical Research Platform</p><h2 id="heroTitle">光迹</h2><p class="hero-project-name">多维光学现象交互研究平台</p><p class="hero-copy">将实验数据、物理公式与实时可视化放在同一工作台中，探索冰洲石红光余晖、旋光散射和 RGB 光谱重建三个相互独立的课题。</p></div><div class="optical-orbit" aria-hidden="true"><span class="optical-core"></span></div></section>
     <main class="app-main"><div id="opticsWorkbenchLite">
   <style>
     #opticsWorkbenchLite{width:100%;min-width:0;color:var(--foreground)}
@@ -281,9 +74,18 @@ button,input,select,textarea,code,output{font-family:var(--font-ui);font-feature
     #opticsWorkbenchLite .owl-chip{width:1rem;height:1rem;display:inline-block;border-radius:50%;vertical-align:-.15rem;margin-inline-end:.35rem;border:1px solid color-mix(in srgb,var(--foreground) 20%,transparent)}
     #opticsWorkbenchLite .owl-drop{padding:1rem;border:1px dashed var(--input);border-radius:12px;background:color-mix(in srgb,var(--muted) 42%,transparent)}
     #opticsWorkbenchLite .owl-formula-bar{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+    #opticsWorkbenchLite .owl-guide{display:grid;gap:.3rem;padding:.8rem .95rem;border-inline-start:3px solid var(--viz-series-1);background:color-mix(in srgb,var(--accent) 68%,transparent)}
+    #opticsWorkbenchLite .owl-guide strong{font-weight:500}
+    #opticsWorkbenchLite .owl-help{display:block;margin-top:.18rem;color:var(--muted-foreground);font-size:.86rem;font-weight:400;line-height:1.45}
+    #opticsWorkbenchLite .owl-custom-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem}
+    #opticsWorkbenchLite .owl-custom-list{display:grid;gap:.65rem}
+    #opticsWorkbenchLite .owl-custom-item{display:grid;gap:.5rem;padding:.7rem 0;border-top:1px solid var(--border)}
+    #opticsWorkbenchLite .owl-custom-head{display:flex;align-items:center;justify-content:space-between;gap:.7rem}
+    #opticsWorkbenchLite .owl-custom-control{display:grid;grid-template-columns:1fr auto;align-items:center;gap:.65rem}
+    #opticsWorkbenchLite .owl-custom-control output{min-width:5.5rem;text-align:end}
     #opticsWorkbenchLite summary{cursor:pointer;font-weight:500}
     @media(max-width:736px){#opticsWorkbenchLite .owl-layout{grid-template-columns:1fr}#opticsWorkbenchLite .owl-stats,#opticsWorkbenchLite .owl-param-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#opticsWorkbenchLite .owl-formula-grid{grid-template-columns:1fr}}
-    @media(max-width:420px){#opticsWorkbenchLite .owl-tabs .btn{width:100%}#opticsWorkbenchLite .owl-stats,#opticsWorkbenchLite .owl-param-grid{grid-template-columns:1fr}}
+    @media(max-width:420px){#opticsWorkbenchLite .owl-tabs .btn{width:100%}#opticsWorkbenchLite .owl-stats,#opticsWorkbenchLite .owl-param-grid,#opticsWorkbenchLite .owl-custom-fields{grid-template-columns:1fr}}
     @media(prefers-reduced-motion:reduce){#opticsWorkbenchLite .owl-crystal{transition:none}}
   </style>
 
@@ -336,15 +138,18 @@ button,input,select,textarea,code,output{font-family:var(--font-ui);font-feature
 
     <section class="owl-stack" id="owlRGB" role="tabpanel" aria-labelledby="owlRGBTab" hidden>
       <div class="owl-head"><div><span class="viz-badge">独立颜色测量课题</span><h2>RGB 主波长与光谱重建</h2></div><span class="text-small text-muted">基于 RGB 3 原程序 · 本地离线处理</span></div>
+      <div class="owl-guide"><strong>初学者路线</strong><span>先用 RGB 滑块认识颜色坐标，再观察拟合光谱；也可以载入图片选点或用标准光谱训练 PCA。第 5 步允许叠加任意数量的自定义光谱成分。</span></div>
       <div class="owl-steps" role="tablist" aria-label="RGB 分析功能">
         <button class="btn" data-rgb-step="pixel" aria-selected="true" type="button">1 单像素分析</button>
         <button class="btn" data-rgb-step="spectrum" aria-selected="false" type="button">2 光谱拟合</button>
         <button class="btn" data-rgb-step="image" aria-selected="false" type="button">3 图片选点</button>
         <button class="btn" data-rgb-step="pca" aria-selected="false" type="button">4 PCA 校准</button>
+        <button class="btn" data-rgb-step="custom" aria-selected="false" type="button">5 自定义参数</button>
       </div>
 
       <div class="owl-layout" data-rgb-panel="pixel">
         <div class="owl-controls">
+          <div class="owl-guide"><strong>这一步做什么？</strong><span>R、G、B 分别表示红、绿、蓝三通道强度，范围 0–255。调节任一通道后，程序会把屏幕颜色换算成 CIE 1931 色度坐标，并估计主波长、纯度与可信度。</span></div>
           <div class="owl-color-preview" id="rgbPreview"><span id="rgbHex">#E33A52</span></div>
           <div class="owl-rgb-lines">
             <label class="owl-rgb-line" for="rgbR"><strong>R</strong><input class="form-range" id="rgbR" type="range" min="0" max="255" value="227"><output id="rgbROut">227</output></label>
@@ -375,10 +180,11 @@ button,input,select,textarea,code,output{font-family:var(--font-ui);font-feature
 
       <div class="owl-layout" data-rgb-panel="spectrum" hidden>
         <div class="owl-controls">
-          <label class="form-label owl-label" for="rgbSpectrumMode">拟合模式<select class="form-select" id="rgbSpectrumMode"><option value="ratio">高斯拟合 · RGB 占比</option><option value="sensitivity">高斯拟合 · 波长灵敏度</option><option value="light">光源经验拟合</option><option value="pca">PCA 校准模型</option></select></label>
-          <label class="form-label owl-label" for="rgbDelta"><span class="owl-label-line"><span>灵敏度扰动 ΔRGB</span><strong id="rgbDeltaOut">5</strong></span><input class="form-range" id="rgbDelta" type="range" min="1" max="30" value="5"></label>
-          <label class="form-label owl-label" for="rgbLightSource">光源类型<select class="form-select" id="rgbLightSource"><option value="daylight">自然日光</option><option value="led_cool">冷白 LED</option><option value="led_warm">暖白 LED</option><option value="incandescent">白炽灯</option><option value="fluorescent">荧光灯</option><option value="candle">烛光</option><option value="halogen">卤素灯</option><option value="neon">霓虹灯</option></select></label>
-          <label class="form-label owl-label" for="rgbBias"><span class="owl-label-line"><span>色温/强度偏置</span><strong id="rgbBiasOut">1.00</strong></span><input class="form-range" id="rgbBias" type="range" min="50" max="150" value="100"></label>
+          <div class="owl-guide"><strong>怎样看光谱？</strong><span>横轴是波长，纵轴是相对强度。峰值表示最强的波段，重心表示整体偏蓝或偏红，展宽越大说明颜色成分越分散。RGB 只能近似重建光谱，精确研究应优先使用光谱仪或 PCA 校准数据。</span></div>
+          <label class="form-label owl-label" for="rgbSpectrumMode">拟合模式<span class="owl-help">决定采用 RGB 比例、灵敏度、光源经验模型还是校准后的 PCA。</span><select class="form-select" id="rgbSpectrumMode"><option value="ratio">高斯拟合 · RGB 占比</option><option value="sensitivity">高斯拟合 · 波长灵敏度</option><option value="light">光源经验拟合</option><option value="pca">PCA 校准模型</option></select></label>
+          <label class="form-label owl-label" for="rgbDelta"><span class="owl-label-line"><span>灵敏度扰动 ΔRGB</span><strong id="rgbDeltaOut">5</strong></span><span class="owl-help">每次将单个通道上下改变 ΔRGB，用主波长变化估计该通道的敏感程度。</span><input class="form-range" id="rgbDelta" type="range" min="1" max="30" value="5"></label>
+          <label class="form-label owl-label" for="rgbLightSource">光源类型<span class="owl-help">只有“光源经验拟合”使用此项，用来选择不同的典型光谱轮廓。</span><select class="form-select" id="rgbLightSource"><option value="daylight">自然日光</option><option value="led_cool">冷白 LED</option><option value="led_warm">暖白 LED</option><option value="incandescent">白炽灯</option><option value="fluorescent">荧光灯</option><option value="candle">烛光</option><option value="halogen">卤素灯</option><option value="neon">霓虹灯</option></select></label>
+          <label class="form-label owl-label" for="rgbBias"><span class="owl-label-line"><span>色温/强度偏置</span><strong id="rgbBiasOut">1.00</strong></span><span class="owl-help">1.00 表示不修正；数值变化会调整经验光源模型的整体响应。</span><input class="form-range" id="rgbBias" type="range" min="50" max="150" value="100"></label>
           <div class="owl-result text-small" id="rgbSpectrumFormula">正在生成拟合说明。</div>
         </div>
         <div class="owl-stack">
@@ -390,6 +196,7 @@ button,input,select,textarea,code,output{font-family:var(--font-ui);font-feature
 
       <div class="owl-layout" data-rgb-panel="image" hidden>
         <div class="owl-controls">
+          <div class="owl-guide"><strong>使用方法</strong><span>载入照片后点击任意像素，程序读取该点的 RGB 并完成与第 1 步相同的分析。显示缩放只改变画面大小，不改变原始像素值。</span></div>
           <label class="owl-drop" for="rgbImageFile"><strong>载入图片</strong><span class="text-small text-muted">支持 PNG、JPG、WebP；图片仅在本机浏览器读取。</span><input class="form-control owl-input" id="rgbImageFile" type="file" accept="image/*"></label>
           <label class="form-label owl-label" for="rgbZoom"><span class="owl-label-line"><span>显示缩放</span><strong><span id="rgbZoomOut">100</span>%</strong></span><input class="form-range" id="rgbZoom" type="range" min="50" max="200" value="100"></label>
           <div class="owl-result" id="rgbPickResult">请载入图片，然后点击图像中的测量点。</div>
@@ -400,6 +207,7 @@ button,input,select,textarea,code,output{font-family:var(--font-ui);font-feature
 
       <div class="owl-layout" data-rgb-panel="pca" hidden>
         <div class="owl-controls">
+          <div class="owl-guide"><strong>PCA 是什么？</strong><span>主成分分析会把许多波长点压缩为少数几条代表性曲线，再学习 RGB 与这些曲线系数之间的关系。校准样本越有代表性，重建结果通常越可靠。</span></div>
           <label class="owl-drop" for="rgbPcaImageFile"><strong>载入校准图片（推荐）</strong><span class="text-small text-muted">用于建立 RGB 与主成分系数的对应关系。</span><input class="form-control owl-input" id="rgbPcaImageFile" type="file" accept="image/*"></label>
           <label class="owl-drop" for="rgbPcaFile"><strong>载入光谱 CSV</strong><span class="text-small text-muted">首列为波长；后续各列为校准样本的光谱强度。</span><input class="form-control owl-input" id="rgbPcaFile" type="file" accept=".csv,text/csv"></label>
           <label class="form-label owl-label" for="rgbPcaComponents"><span class="owl-label-line"><span>主成分数</span><strong id="rgbPcaComponentsOut">3</strong></span><input class="form-range" id="rgbPcaComponents" type="range" min="1" max="6" value="3"></label>
@@ -413,22 +221,40 @@ button,input,select,textarea,code,output{font-family:var(--font-ui);font-feature
           <div class="owl-result" id="rgbPcaStatus">等待载入 CSV。未校准时，“PCA 模式”使用内置三基函数近似。</div>
         </div>
       </div>
+
+      <div class="owl-layout" data-rgb-panel="custom" hidden>
+        <div class="owl-controls">
+          <div class="owl-guide"><strong>扩展四个内置模块</strong><span>在基础拟合上增加高斯峰、洛伦兹峰或吸收凹陷。可以连续添加多项，每项都会立即参与光谱计算；它们是探索性修正，不替代真实标定。</span></div>
+          <div class="owl-custom-fields">
+            <label class="form-label owl-label" for="rgbCustomName">参数名称<span class="owl-help">例如“荧光峰”或“滤光片吸收”。</span><input class="form-control owl-input" id="rgbCustomName" value="自定义峰"></label>
+            <label class="form-label owl-label" for="rgbCustomShape">作用形状<span class="owl-help">凹陷会削弱该波段，其余两种会增强。</span><select class="form-select" id="rgbCustomShape"><option value="gaussian">高斯峰</option><option value="lorentzian">洛伦兹峰</option><option value="notch">吸收凹陷</option></select></label>
+            <label class="form-label owl-label" for="rgbCustomCenter">中心波长（nm）<span class="owl-help">修正作用最明显的位置，范围 380–780 nm。</span><input class="form-control owl-input" id="rgbCustomCenter" type="number" min="380" max="780" value="610"></label>
+            <label class="form-label owl-label" for="rgbCustomWidth">宽度（nm）<span class="owl-help">越大影响的波长范围越宽。</span><input class="form-control owl-input" id="rgbCustomWidth" type="number" min="1" max="200" value="24"></label>
+            <label class="form-label owl-label" for="rgbCustomAmplitude">幅度<span class="owl-help">建议 0–1；数值越大修正越明显。</span><input class="form-control owl-input" id="rgbCustomAmplitude" type="number" min="0" max="2" step="0.05" value="0.25"></label>
+          </div>
+          <button class="btn btn-primary" id="rgbAddCustom" type="button">添加自定义光谱参数</button>
+        </div>
+        <div class="owl-stack"><div><h3>已启用的自定义参数</h3><div class="owl-custom-list" id="rgbCustomList"><span class="text-small text-muted">尚未添加；基础拟合保持不变。</span></div></div><svg class="owl-plot" id="rgbCustomPlot" viewBox="0 0 720 360" role="img" aria-label="应用自定义参数后的 RGB 重建光谱"></svg><div class="owl-result" id="rgbCustomResult">添加参数后会显示它对峰值、重心和展宽的影响。</div></div>
+      </div>
     </section>
 
     <section class="owl-stack" id="owlScatter" role="tabpanel" aria-labelledby="owlScatterTab" hidden>
       <div class="owl-head"><div><span class="viz-badge">独立研究课题</span><h2>旋光散射参数探索与仿真</h2></div><span class="text-small text-muted">不调用冰洲石余晖数据</span></div>
+      <div class="owl-guide"><strong>初学者路线</strong><span>先由透射实验求衰减系数 μt，再由偏振旋转求 Ω；之后用角度扫描拟合 B、V、β，最后把这些量带入传播模型。第 5 步可把额外实验变量映射到模型参数进行情景研究。</span></div>
       <div class="owl-steps" role="tablist" aria-label="旋光散射步骤">
         <button class="btn" data-owl-step="mu" aria-selected="true" type="button">1 衰减系数</button>
         <button class="btn" data-owl-step="omega" aria-selected="false" type="button">2 旋光速率</button>
         <button class="btn" data-owl-step="fit" aria-selected="false" type="button">3 参数拟合</button>
         <button class="btn" data-owl-step="sim" aria-selected="false" type="button">4 散射仿真</button>
+        <button class="btn" data-owl-step="custom" aria-selected="false" type="button">5 自定义参数</button>
       </div>
 
       <div class="owl-layout" data-owl-panel="mu">
         <div class="owl-controls">
-          <label class="form-label owl-label" for="owlMuL">有效光程 L（cm）<input class="form-control owl-input" id="owlMuL" value="10"></label>
-          <label class="form-label owl-label" for="owlMuRef">参考透射光强<textarea class="form-control owl-input" id="owlMuRef">1.00,0.99,1.01</textarea></label>
-          <label class="form-label owl-label" for="owlMuSam">样品透射光强<textarea class="form-control owl-input" id="owlMuSam">0.82,0.81,0.83</textarea></label>
+          <div class="owl-guide"><strong>这一步做什么？</strong><span>比较“没有样品”与“经过样品”的透射光强，用 Beer–Lambert 形式 μt=ln(Iref/Isam)/L 计算单位长度上的有效衰减。μt 越大，光在介质中减弱得越快。</span></div>
+          <label class="form-label owl-label" for="owlMuL">有效光程 L（cm）<span class="owl-help">光实际穿过样品的距离，必须为正数。</span><input class="form-control owl-input" id="owlMuL" value="10"></label>
+          <label class="form-label owl-label" for="owlMuRef">参考透射光强<span class="owl-help">无样品或基准状态的多次测量值，用逗号分隔。</span><textarea class="form-control owl-input" id="owlMuRef">1.00,0.99,1.01</textarea></label>
+          <label class="form-label owl-label" for="owlMuSam">样品透射光强<span class="owl-help">加入样品后的多次测量值，单位应与参考光强一致。</span><textarea class="form-control owl-input" id="owlMuSam">0.82,0.81,0.83</textarea></label>
           <button class="btn btn-primary" id="owlCalcMu" type="button">计算 μt</button>
         </div>
         <div class="owl-stack"><div class="card viz-stat"><span class="text-muted">有效衰减系数 μt</span><span class="viz-stat-value"><span id="owlMuValue">0.02000</span> 1/cm</span></div><div class="owl-result" id="owlMuResult">等待计算</div></div>
@@ -436,9 +262,10 @@ button,input,select,textarea,code,output{font-family:var(--font-ui);font-feature
 
       <div class="owl-layout" data-owl-panel="omega" hidden>
         <div class="owl-controls">
-          <label class="form-label owl-label" for="owlOmegaL">有效光程 L（cm）<input class="form-control owl-input" id="owlOmegaL" value="10"></label>
-          <label class="form-label owl-label" for="owlAlpha">总旋转角 α（deg）<textarea class="form-control owl-input" id="owlAlpha">12.0,12.2,11.9</textarea></label>
-          <label class="form-label owl-label" for="owlPeriod">空间周期 P（cm，可选）<input class="form-control owl-input" id="owlPeriod" placeholder="填写后使用 Ω = 180/P"></label>
+          <div class="owl-guide"><strong>这一步做什么？</strong><span>Ω 表示偏振方向每传播 1 cm 旋转多少度。可用总旋转角除以光程，也可用强度振荡的空间周期 P 通过 Ω=180°/P 计算。</span></div>
+          <label class="form-label owl-label" for="owlOmegaL">有效光程 L（cm）<span class="owl-help">测量总旋转角所对应的传播距离。</span><input class="form-control owl-input" id="owlOmegaL" value="10"></label>
+          <label class="form-label owl-label" for="owlAlpha">总旋转角 α（deg）<span class="owl-help">多次角度测量值，用逗号分隔；程序会使用平均值。</span><textarea class="form-control owl-input" id="owlAlpha">12.0,12.2,11.9</textarea></label>
+          <label class="form-label owl-label" for="owlPeriod">空间周期 P（cm，可选）<span class="owl-help">填写后优先采用周期法；留空则采用 α/L。</span><input class="form-control owl-input" id="owlPeriod" placeholder="填写后使用 Ω = 180/P"></label>
           <button class="btn btn-primary" id="owlCalcOmega" type="button">计算 Ω</button>
         </div>
         <div class="owl-stack"><div class="card viz-stat"><span class="text-muted">旋光速率 Ω</span><span class="viz-stat-value"><span id="owlOmegaValue">1.2000</span> deg/cm</span></div><div class="owl-result" id="owlOmegaResult">等待计算</div></div>
@@ -446,9 +273,10 @@ button,input,select,textarea,code,output{font-family:var(--font-ui);font-feature
 
       <div class="owl-layout" data-owl-panel="fit" hidden>
         <div class="owl-controls">
-          <label class="form-label owl-label" for="owlTheta">起偏器角度 θ（deg）<textarea class="form-control owl-input" id="owlTheta">0,15,30,45,60,75,90,105,120,135,150,165</textarea></label>
-          <label class="form-label owl-label" for="owlIntensity">侧向散射光强<textarea class="form-control owl-input" id="owlIntensity">0.41,0.48,0.62,0.77,0.89,0.95,0.91,0.79,0.63,0.49,0.39,0.36</textarea></label>
-          <label class="form-label owl-label" for="owlFitZ">测量位置 z（cm）<input class="form-control owl-input" id="owlFitZ" value="5"></label>
+          <div class="owl-guide"><strong>参数含义</strong><span>B 是散射主体强度，V 是振荡可见度（越接近 1 起伏越明显），β 是相位偏移。R² 越接近 1，模型对本组角度扫描数据的解释越好。</span></div>
+          <label class="form-label owl-label" for="owlTheta">起偏器角度 θ（deg）<span class="owl-help">每个角度必须与下方一个光强一一对应，至少需要 4 组。</span><textarea class="form-control owl-input" id="owlTheta">0,15,30,45,60,75,90,105,120,135,150,165</textarea></label>
+          <label class="form-label owl-label" for="owlIntensity">侧向散射光强<span class="owl-help">与角度序列等长，可使用相对强度，但测量条件应保持一致。</span><textarea class="form-control owl-input" id="owlIntensity">0.41,0.48,0.62,0.77,0.89,0.95,0.91,0.79,0.63,0.49,0.39,0.36</textarea></label>
+          <label class="form-label owl-label" for="owlFitZ">测量位置 z（cm）<span class="owl-help">探测器沿传播方向所在的位置。</span><input class="form-control owl-input" id="owlFitZ" value="5"></label>
           <button class="btn btn-primary" id="owlCalcFit" type="button">拟合 B / V / β</button>
         </div>
         <div class="owl-stack"><div class="viz-grid owl-stats"><div class="card viz-stat"><span class="text-muted">B</span><span class="viz-stat-value" id="owlBValue">0.66</span></div><div class="card viz-stat"><span class="text-muted">V</span><span class="viz-stat-value" id="owlVValue">0.52</span></div><div class="card viz-stat"><span class="text-muted">β</span><span class="viz-stat-value"><span id="owlBetaValue">18</span>°</span></div></div><svg class="owl-plot" id="owlFitPlot" viewBox="0 0 720 330" role="img" aria-label="旋光散射角度扫描拟合曲线"></svg><div class="owl-result text-small" id="owlFitResult">等待拟合</div></div>
@@ -456,6 +284,7 @@ button,input,select,textarea,code,output{font-family:var(--font-ui);font-feature
 
       <div class="owl-layout" data-owl-panel="sim" hidden>
         <div class="owl-controls">
+          <div class="owl-guide"><strong>怎样读仿真？</strong><span>曲线整体下降来自 μt 引起的指数衰减，周期性起伏来自 Ω 引起的偏振旋转。B 控制主体强度，V 控制起伏深度，β 控制波形左右位置，背景是仪器或环境的固定信号。</span></div>
           <div class="owl-param-grid">
             <label class="form-label owl-label" for="owlSimMu">μt<input class="form-control owl-input" id="owlSimMu" value="0.02"></label>
             <label class="form-label owl-label" for="owlSimOmega">Ω<input class="form-control owl-input" id="owlSimOmega" value="1.2"></label>
@@ -469,6 +298,26 @@ button,input,select,textarea,code,output{font-family:var(--font-ui);font-feature
         </div>
         <div class="owl-stack"><svg class="owl-plot" id="owlSimPlot" viewBox="0 0 720 330" role="img" aria-label="旋光散射总光强沿传播长度的变化"></svg><div class="owl-result text-small" id="owlSimResult">点击“运行仿真”生成曲线</div></div>
       </div>
+
+      <div class="owl-layout" data-owl-panel="custom" hidden>
+        <div class="owl-controls">
+          <div class="owl-guide"><strong>扩展四个内置步骤</strong><span>把温度、浓度、粒径、湿度等额外变量映射到一个基础模型参数。每个单位变化按“影响率”改变目标参数；可以连续添加多项，仿真会叠加全部影响。</span></div>
+          <div class="owl-custom-fields">
+            <label class="form-label owl-label" for="owlCustomName">变量名称<span class="owl-help">例如温度、浓度或粒径。</span><input class="form-control owl-input" id="owlCustomName" value="温度"></label>
+            <label class="form-label owl-label" for="owlCustomSymbol">符号<span class="owl-help">用于结果说明，例如 T、c、d。</span><input class="form-control owl-input" id="owlCustomSymbol" value="T"></label>
+            <label class="form-label owl-label" for="owlCustomValue">当前值<input class="form-control owl-input" id="owlCustomValue" type="number" value="25"></label>
+            <label class="form-label owl-label" for="owlCustomBase">基准值<span class="owl-help">在该数值下不改变模型。</span><input class="form-control owl-input" id="owlCustomBase" type="number" value="25"></label>
+            <label class="form-label owl-label" for="owlCustomMin">最小值<input class="form-control owl-input" id="owlCustomMin" type="number" value="5"></label>
+            <label class="form-label owl-label" for="owlCustomMax">最大值<input class="form-control owl-input" id="owlCustomMax" type="number" value="60"></label>
+            <label class="form-label owl-label" for="owlCustomStep">步长<input class="form-control owl-input" id="owlCustomStep" type="number" min="0.0001" step="any" value="1"></label>
+            <label class="form-label owl-label" for="owlCustomUnit">单位<input class="form-control owl-input" id="owlCustomUnit" value="°C"></label>
+            <label class="form-label owl-label" for="owlCustomTarget">影响哪个参数<span class="owl-help">选择额外变量在当前假设中作用的物理量。</span><select class="form-select" id="owlCustomTarget"><option value="mu">μt 衰减系数</option><option value="omega">Ω 旋光速率</option><option value="B">B 主体强度</option><option value="V">V 可见度</option><option value="beta">β 相位</option><option value="bg">背景</option><option value="zmax">最大传播长度</option></select></label>
+            <label class="form-label owl-label" for="owlCustomEffect">影响率（%/单位）<span class="owl-help">例如 2 表示变量每增加 1 单位，目标参数增加 2%。</span><input class="form-control owl-input" id="owlCustomEffect" type="number" step="0.1" value="1"></label>
+          </div>
+          <button class="btn btn-primary" id="owlAddCustom" type="button">添加自定义实验变量</button>
+        </div>
+        <div class="owl-stack"><div><h3>已启用的额外变量</h3><div class="owl-custom-list" id="owlCustomList"><span class="text-small text-muted">尚未添加；仿真使用基础参数。</span></div></div><svg class="owl-plot" id="owlCustomPlot" viewBox="0 0 720 330" role="img" aria-label="加入自定义实验变量后的旋光散射仿真"></svg><div class="owl-result" id="owlCustomResult">添加变量后，可用滑块改变其值并观察仿真曲线。</div></div>
+      </div>
     </section>
   </div>
 
@@ -478,8 +327,8 @@ button,input,select,textarea,code,output{font-family:var(--font-ui);font-feature
       if(!root||root.dataset.ready)return;root.dataset.ready='1';
       const q=id=>root.querySelector('#'+id),qa=s=>[...root.querySelectorAll(s)],clamp=(x,a,b)=>Math.max(a,Math.min(b,x)),mix=(a,b,w)=>a+(b-a)*w,rad=d=>d*Math.PI/180;
       const list=s=>String(s).trim().split(/[，,;；\s]+/).filter(Boolean).map(Number),mean=a=>a.reduce((s,x)=>s+x,0)/a.length,sd=a=>a.length<2?NaN:Math.sqrt(a.reduce((s,x)=>s+(x-mean(a))**2,0)/(a.length-1)),fmt=x=>Number.isFinite(x)?Number(x.toPrecision(5)).toString():'—';
-      const state={mu:.02,omega:1.2,B:.66,V:.52,beta:18,bg:.05};
-      const rgbState={pca:null,pcaTable:null,calibrationImage:null,records:[]};
+      const state={mu:.02,omega:1.2,B:.66,V:.52,beta:18,bg:.05,custom:[]};
+      const rgbState={pca:null,pcaTable:null,calibrationImage:null,records:[],customBands:[]};
       const cie=[[380,.1741,.005],[390,.1721,.0041],[400,.1733,.0048],[410,.1726,.0048],[420,.1714,.0051],[430,.1689,.0069],[440,.1644,.0109],[450,.1566,.0177],[460,.144,.0297],[470,.1241,.0578],[480,.0913,.1327],[490,.0454,.295],[500,.0082,.5384],[510,.0139,.7502],[520,.0743,.8338],[530,.1547,.8059],[540,.2296,.7543],[550,.3016,.6923],[560,.3731,.6245],[570,.4441,.5547],[580,.5125,.4866],[590,.5752,.4242],[600,.627,.3725],[610,.6658,.334],[620,.6915,.3083],[630,.7079,.292],[640,.719,.2809],[650,.726,.274],[660,.73,.27],[670,.7327,.2673],[680,.7334,.2666],[690,.7341,.2659],[700,.7347,.2653],[710,.7347,.2653],[720,.7347,.2653],[730,.7347,.2653],[740,.7347,.2653],[750,.7347,.2653],[760,.7347,.2653],[770,.7347,.2653],[780,.7347,.2653]],white=[.31271,.32902];
       const data=[[5,1,170.5,70.7,203.8],[5,3,99.8,58.2,104],[5,5,104,0,153.9],[5,10,108.2,99.8,174.7],[15,1,83.2,70.7,191.3],[15,3,87.4,0,91.5],[15,5,79,74.9,91.5],[15,10,87.4,74.9,99.8],[25,1,175.4,133.6,221.3],[25,3,200.4,154.5,275.6],[25,5,154.5,133.6,179.5],[25,10,150.3,133.6,192.1],[60,1,74.9,74.9,191.3],[60,3,95.7,79,153.9],[60,5,83.2,74.9,124.8],[60,10,87.4,70.7,108.2]],temps=[5,15,25,60],exps=[1,3,5,10],anchors=[[5,117.6],[15,84.2],[25,169],[60,84.9]];
       const bracket=(a,v)=>{if(v<=a[0])return[a[0],a[0],0];if(v>=a[a.length-1])return[a[a.length-1],a[a.length-1],0];for(let i=0;i<a.length-1;i++)if(v>=a[i]&&v<=a[i+1])return[a[i],a[i+1],(v-a[i])/(a[i+1]-a[i])];};
@@ -510,6 +359,19 @@ button,input,select,textarea,code,output{font-family:var(--font-ui);font-feature
       }
       const rgbValues=()=>[+q('rgbR').value,+q('rgbG').value,+q('rgbB').value];
       function setRgb(r,g,b){[['rgbR','rgbROut',r],['rgbG','rgbGOut',g],['rgbB','rgbBOut',b]].forEach(([id,out,v])=>{q(id).value=Math.round(v);q(out).textContent=Math.round(v)});updateRgb()}
+      function applyRgbCustom(waves,source){
+        let vals=source.slice();
+        rgbState.customBands.forEach(b=>{vals=vals.map((v,i)=>{const w=waves[i],shape=b.shape==='lorentzian'?1/(1+((w-b.center)/b.width)**2):gauss(w,b.center,b.width);return b.shape==='notch'?v*(1-clamp(b.amplitude,0,.98)*shape):v+b.amplitude*shape})});
+        return{vals:normalize(vals.map(v=>Math.max(0,v))),desc:rgbState.customBands.length?` 已叠加 ${rgbState.customBands.length} 个自定义光谱参数。`:''};
+      }
+      function renderRgbCustom(){
+        const listNode=q('rgbCustomList');
+        if(!rgbState.customBands.length){listNode.innerHTML='<span class="text-small text-muted">尚未添加；基础拟合保持不变。</span>';q('rgbCustomResult').textContent='添加参数后会显示它对峰值、重心和展宽的影响。'}else{
+          listNode.replaceChildren(...rgbState.customBands.map((b,index)=>{const item=document.createElement('div');item.className='owl-custom-item';const head=document.createElement('div');head.className='owl-custom-head';const title=document.createElement('strong');title.textContent=`${b.name} · ${b.shape==='gaussian'?'高斯峰':b.shape==='lorentzian'?'洛伦兹峰':'吸收凹陷'} · ${b.center} nm`;const remove=document.createElement('button');remove.className='btn';remove.type='button';remove.textContent='移除';remove.addEventListener('click',()=>{rgbState.customBands.splice(index,1);renderRgbCustom();updateSpectrum()});head.append(title,remove);const control=document.createElement('label');control.className='owl-custom-control';const slider=document.createElement('input');slider.className='form-range';slider.type='range';slider.min='0';slider.max='2';slider.step='.01';slider.value=b.amplitude;slider.setAttribute('aria-label',`${b.name} 幅度`);const out=document.createElement('output');out.textContent=`幅度 ${b.amplitude.toFixed(2)}`;slider.addEventListener('input',()=>{b.amplitude=+slider.value;out.textContent=`幅度 ${b.amplitude.toFixed(2)}`;updateSpectrum()});control.append(slider,out);item.append(head,control);return item}));
+        }
+        const s=spectrumFor(rgbValues(),q('rgbSpectrumMode').value),peak=s.waves[s.vals.indexOf(Math.max(...s.vals))],sum=s.vals.reduce((a,b)=>a+b,0)||1,centroid=s.vals.reduce((v,y,i)=>v+y*s.waves[i],0)/sum,spread=Math.sqrt(s.vals.reduce((v,y,i)=>v+y*(s.waves[i]-centroid)**2,0)/sum);plot(q('rgbCustomPlot'),[{p:s.waves.map((w,i)=>[w,s.vals[i]]),c:'var(--viz-series-2)',w:3}],[],'波长（nm）','自定义后相对强度');if(rgbState.customBands.length)q('rgbCustomResult').textContent=`当前共 ${rgbState.customBands.length} 项修正：峰值 ${peak.toFixed(0)} nm，光谱重心 ${centroid.toFixed(1)} nm，等效展宽 ${spread.toFixed(1)} nm。幅度越大，对对应波段的增强或削弱越明显。`;
+      }
+      function addRgbCustom(){const name=q('rgbCustomName').value.trim()||'自定义参数',shape=q('rgbCustomShape').value,center=+q('rgbCustomCenter').value,width=+q('rgbCustomWidth').value,amplitude=+q('rgbCustomAmplitude').value;if(!(center>=380&&center<=780&&width>0&&Number.isFinite(amplitude))){q('rgbCustomResult').textContent='请输入 380–780 nm 的中心波长、正数宽度和有效幅度。';return}rgbState.customBands.push({name,shape,center,width,amplitude:Math.max(0,amplitude)});renderRgbCustom();updateSpectrum()}
       function updateRgb(){
         const [r,g,b]=rgbValues(),a=rgbAnalysis(r,g,b),hex='#'+[r,g,b].map(v=>Math.round(v).toString(16).padStart(2,'0')).join('').toUpperCase();q('rgbPreview').style.background=hex;q('rgbHex').textContent=hex;['R','G','B'].forEach((c,i)=>q('rgb'+c+'Out').textContent=[r,g,b][i]);q('rgbWave').textContent=Number.isFinite(a.wavelength)?a.wavelength.toFixed(1):'—';q('rgbWaveLabel').textContent=a.type;q('rgbPurity').textContent=(100*a.purity).toFixed(1);q('rgbConfidence').textContent=(100*a.confidence).toFixed(0);q('rgbDetail').textContent=`线性 RGB = (${a.linear.map(v=>v.toFixed(4)).join(', ')})\nXYZ = (${a.XYZ.map(v=>v.toFixed(4)).join(', ')}) · xy = (${a.xy.map(v=>v.toFixed(4)).join(', ')})\n${a.type}${Number.isFinite(a.wavelength)?`约 ${a.wavelength.toFixed(1)} nm`:'无法稳定确定'}；低亮度或接近白点时可信度会降低。`;drawCie(a);updateSpectrum();return a;
       }
@@ -518,9 +380,10 @@ button,input,select,textarea,code,output{font-family:var(--font-ui);font-feature
         if(mode==='ratio'){const widths=ratios.map(v=>50/(v+.1));vals=waves.map(w=>ratios.reduce((s,v,i)=>s+v*gauss(w,peaks[i],widths[i]),0));desc=`S(λ)=Σ rᵢ·exp[-(λ-λᵢ)²/(2σᵢ²)]；σᵢ=50/(rᵢ+0.1)，λᵢ={620,550,470} nm。`}
         else if(mode==='sensitivity'){const d=+q('rgbDelta').value,base=rgbAnalysis(...rgb),sens=rgb.map((v,i)=>{const hi=rgb.slice(),lo=rgb.slice();hi[i]=clamp(v+d,0,255);lo[i]=clamp(v-d,0,255);const wh=rgbAnalysis(...hi).wavelength,wl=rgbAnalysis(...lo).wavelength;return Number.isFinite(wh)&&Number.isFinite(wl)?Math.abs(wh-wl):0}),ss=sens.reduce((s,v)=>s+v,0)||1,widths=sens.map(v=>30+120*v/ss);vals=waves.map(w=>ratios.reduce((s,v,i)=>s+v*gauss(w,peaks[i],widths[i]),0));desc=`Δλᵢ=|λ(RGB+Δᵢ)-λ(RGB-Δᵢ)|；σᵢ=30+120·Δλᵢ/ΣΔλ。当前 ΔRGB=${d}。`}
         else if(mode==='light'){const sources={incandescent:[620,200,'warm'],fluorescent:[450,80,'cool'],led_warm:[450,60,'warm'],led_cool:[440,50,'cool'],daylight:[500,180,'neutral'],candle:[650,250,'warm'],halogen:[600,180,'warm'],neon:[640,20,'line']},src=q('rgbLightSource').value,[m,s,t]=sources[src],bias=+q('rgbBias').value/100;vals=waves.map(w=>{let profile=gauss(w,m,s);if(t==='line')profile+=.35*gauss(w,m-45,9)+.18*gauss(w,m+35,8);const rgbWeight=ratios[0]*gauss(w,620,50)+ratios[1]*gauss(w,530,40)+ratios[2]*gauss(w,470,35),tone=t==='warm'?mix(.72,1.35,(w-380)/400):t==='cool'?mix(1.35,.72,(w-380)/400):1;return profile*rgbWeight*tone*bias});desc=`S(λ)=光源经验轮廓·RGB 响应权重·色温偏置；当前为 ${q('rgbLightSource').selectedOptions[0].textContent}。`}
-        else{const m=rgbState.pca;if(m){const f=[1,...rgb.map(v=>v/255)],scores=m.regs.map(reg=>reg.reduce((s,v,i)=>s+v*f[i],0));vals=m.mean.map((v,i)=>v+m.components.reduce((s,c,j)=>s+scores[j]*c[i],0));desc=`S(λ)=μ(λ)+Σ aₖ(R,G,B)·PCₖ(λ)，使用已训练的 ${m.components.length} 个主成分。`;return{waves:m.waves,vals:normalize(vals),desc}}vals=waves.map(w=>ratios[0]*gauss(w,620,36)+ratios[1]*gauss(w,540,32)+ratios[2]*gauss(w,460,28));desc='尚未载入校准模型，当前使用内置 RGB 三基函数近似。'}return{waves,vals:normalize(vals),desc};
+        else{const m=rgbState.pca;if(m){const f=[1,...rgb.map(v=>v/255)],scores=m.regs.map(reg=>reg.reduce((s,v,i)=>s+v*f[i],0));vals=m.mean.map((v,i)=>v+m.components.reduce((s,c,j)=>s+scores[j]*c[i],0));desc=`S(λ)=μ(λ)+Σ aₖ(R,G,B)·PCₖ(λ)，使用已训练的 ${m.components.length} 个主成分。`;const adjusted=applyRgbCustom(m.waves,vals);return{waves:m.waves,vals:adjusted.vals,desc:desc+adjusted.desc}}vals=waves.map(w=>ratios[0]*gauss(w,620,36)+ratios[1]*gauss(w,540,32)+ratios[2]*gauss(w,460,28));desc='尚未载入校准模型，当前使用内置 RGB 三基函数近似。'}const adjusted=applyRgbCustom(waves,vals);return{waves,vals:adjusted.vals,desc:desc+adjusted.desc};
       }
-      function updateSpectrum(){const rgb=rgbValues(),mode=q('rgbSpectrumMode').value,s=spectrumFor(rgb,mode),peak=s.waves[s.vals.indexOf(Math.max(...s.vals))],centroid=s.vals.reduce((v,y,i)=>v+y*s.waves[i],0)/(s.vals.reduce((a,b)=>a+b,0)||1),spread=Math.sqrt(s.vals.reduce((v,y,i)=>v+y*(s.waves[i]-centroid)**2,0)/(s.vals.reduce((a,b)=>a+b,0)||1));q('rgbDeltaOut').textContent=q('rgbDelta').value;q('rgbBiasOut').textContent=(+q('rgbBias').value/100).toFixed(2);q('rgbSpectrumFormula').textContent=s.desc;q('rgbSpectrumPeak').textContent=`峰值 ${peak.toFixed(0)} nm`;q('rgbSpectrumResult').textContent=`光谱重心 ${centroid.toFixed(1)} nm · 等效展宽 ${spread.toFixed(1)} nm · ${mode==='pca'&&rgbState.pca?'校准模型已启用':'相对强度已归一化'}`;plot(q('rgbSpectrumPlot'),[{p:s.waves.map((w,i)=>[w,s.vals[i]]),c:'var(--viz-series-1)',w:3}],[],'波长（nm）','相对光谱强度')}
+      function updateSpectrum(){const rgb=rgbValues(),mode=q('rgbSpectrumMode').value,s=spectrumFor(rgb,mode),peak=s.waves[s.vals.indexOf(Math.max(...s.vals))],centroid=s.vals.reduce((v,y,i)=>v+y*s.waves[i],0)/(s.vals.reduce((a,b)=>a+b,0)||1),spread=Math.sqrt(s.vals.reduce((v,y,i)=>v+y*(s.waves[i]-centroid)**2,0)/(s.vals.reduce((a,b)=>a+b,0)||1));q('rgbDeltaOut').textContent=q('rgbDelta').value;q('rgbBiasOut').textContent=(+q('rgbBias').value/100).toFixed(2);q('rgbSpectrumFormula').textContent=s.desc;q('rgbSpectrumPeak').textContent=`峰值 ${peak.toFixed(0)} nm`;q('rgbSpectrumResult').textContent=`光谱重心 ${centroid.toFixed(1)} nm · 等效展宽 ${spread.toFixed(1)} nm · ${mode==='pca'&&rgbState.pca?'校准模型已启用':'相对强度已归一化'}。峰值是最高点，重心反映整体偏色，展宽反映波段分散程度。`;plot(q('rgbSpectrumPlot'),[{p:s.waves.map((w,i)=>[w,s.vals[i]]),c:'var(--viz-series-1)',w:3}],[],'波长（nm）','相对光谱强度');if(q('rgbCustomPlot'))renderRgbCustomPlotOnly(s)}
+      function renderRgbCustomPlotOnly(s){plot(q('rgbCustomPlot'),[{p:s.waves.map((w,i)=>[w,s.vals[i]]),c:'var(--viz-series-2)',w:3}],[],'波长（nm）','自定义后相对强度');if(rgbState.customBands.length){const peak=s.waves[s.vals.indexOf(Math.max(...s.vals))],sum=s.vals.reduce((a,b)=>a+b,0)||1,centroid=s.vals.reduce((v,y,i)=>v+y*s.waves[i],0)/sum,spread=Math.sqrt(s.vals.reduce((v,y,i)=>v+y*(s.waves[i]-centroid)**2,0)/sum);q('rgbCustomResult').textContent=`当前共 ${rgbState.customBands.length} 项修正：峰值 ${peak.toFixed(0)} nm，光谱重心 ${centroid.toFixed(1)} nm，等效展宽 ${spread.toFixed(1)} nm。幅度越大，对对应波段的增强或削弱越明显。`}}
       function drawDemoImage(){const c=q('rgbImageCanvas'),ctx=c.getContext('2d'),w=c.width,h=c.height,g=ctx.createLinearGradient(0,0,w,0);g.addColorStop(0,'#4020e8');g.addColorStop(.25,'#15a8f2');g.addColorStop(.5,'#25c86b');g.addColorStop(.75,'#f2c532');g.addColorStop(1,'#e93854');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);const shade=ctx.createLinearGradient(0,0,0,h);shade.addColorStop(0,'rgba(255,255,255,.8)');shade.addColorStop(.5,'rgba(255,255,255,0)');shade.addColorStop(1,'rgba(0,0,0,.65)');ctx.fillStyle=shade;ctx.fillRect(0,0,w,h);ctx.fillStyle='#fff';ctx.font='500 22px system-ui';ctx.fillText('示例色彩图 · 可直接点击测量',22,36)}
       function loadImageFile(file,target='picker'){if(!file)return;const reader=new FileReader();reader.onload=()=>{const img=new Image();img.onload=()=>{if(target==='calibration'){rgbState.calibrationImage=img;q('rgbPcaStatus').textContent=`校准图片已载入：${img.naturalWidth} × ${img.naturalHeight}。请继续载入光谱 CSV。`;return}const c=q('rgbImageCanvas'),scale=Math.min(1,1200/img.naturalWidth,800/img.naturalHeight);c.width=Math.max(1,Math.round(img.naturalWidth*scale));c.height=Math.max(1,Math.round(img.naturalHeight*scale));c.getContext('2d').drawImage(img,0,0,c.width,c.height);q('rgbPickResult').textContent=`已载入 ${file.name}（分析画布 ${c.width} × ${c.height}），请点击取点。`;q('rgbCrosshair').hidden=true};img.src=reader.result};reader.readAsDataURL(file)}
       function pickImage(ev){const c=q('rgbImageCanvas'),rect=c.getBoundingClientRect(),x=clamp(Math.floor((ev.clientX-rect.left)/rect.width*c.width),0,c.width-1),y=clamp(Math.floor((ev.clientY-rect.top)/rect.height*c.height),0,c.height-1),d=c.getContext('2d',{willReadFrequently:true}).getImageData(x,y,1,1).data,a=rgbAnalysis(d[0],d[1],d[2]),hex='#'+[d[0],d[1],d[2]].map(v=>v.toString(16).padStart(2,'0')).join('').toUpperCase(),wr=q('rgbCanvasWrap').getBoundingClientRect(),mark=q('rgbCrosshair');mark.hidden=false;mark.style.left=(rect.left-wr.left+(x+.5)/c.width*rect.width)+'px';mark.style.top=(rect.top-wr.top+(y+.5)/c.height*rect.height)+'px';q('rgbPickResult').textContent=`坐标 (${x}, ${y}) · RGB(${d[0]}, ${d[1]}, ${d[2]}) · ${hex}\n${a.type} ${Number.isFinite(a.wavelength)?a.wavelength.toFixed(1)+' nm':'—'} · 纯度 ${(100*a.purity).toFixed(1)}% · 可信度 ${(100*a.confidence).toFixed(0)}%`;setRgb(d[0],d[1],d[2]);rgbState.records.unshift({x,y,hex,w:a.wavelength,type:a.type});rgbState.records=rgbState.records.slice(0,8);q('rgbPickRecords').replaceChildren(...rgbState.records.map(v=>{const row=document.createElement('div');row.className='owl-record';const left=document.createElement('span'),right=document.createElement('span');left.innerHTML=`<i class="owl-chip" style="background:${v.hex}"></i>${v.hex} · (${v.x}, ${v.y})`;right.textContent=Number.isFinite(v.w)?`${v.type} ${v.w.toFixed(1)} nm`:'波长 —';row.append(left,right);return row}))}
@@ -554,48 +417,24 @@ button,input,select,textarea,code,output{font-family:var(--font-ui);font-feature
         const s=temps.map((tt,i)=>({c:`var(--viz-series-${i+1})`,p:exps.map(x=>[x,data.find(d=>d[0]===tt&&d[1]===x)[2]])}));plot(q('owlAfterPlot'),s,[[e,v,'var(--foreground)']],'紫光照射时间（s）','余晖停留时间（ms）');
       }
       let raf;function cut(){cancelAnimationFrame(raf);const v=afterPred(+q('owlTemp').value,+q('owlExposure').value,q('owlAfterMode').value)[0],start=performance.now(),dur=Math.max(500,v*7),cr=q('owlCrystal');const tick=now=>{const p=clamp((now-start)/dur,0,1),a=Math.exp(-3.5*p);cr.style.opacity=.12+.88*a;q('owlClock').textContent=Math.max(0,v*(1-p)).toFixed(0);if(p<1)raf=requestAnimationFrame(tick)};raf=requestAnimationFrame(tick)}
-      function calcMu(){try{const L=+q('owlMuL').value,r=list(q('owlMuRef').value),s=list(q('owlMuSam').value);if(!(L>0&&r.length&&s.length&&r.every(x=>x>0)&&s.every(x=>x>0)))throw Error('请输入正数光程与光强');const rm=mean(r),sm=mean(s),mu=Math.log(rm/sm)/L;state.mu=mu;q('owlMuValue').textContent=fmt(mu);q('owlSimMu').value=fmt(mu);q('owlMuResult').textContent=`参考均值 ${fmt(rm)}；样品均值 ${fmt(sm)}\nμt = ln(Iref / Isam) / L = ${fmt(mu)} 1/cm`}catch(e){q('owlMuResult').textContent='错误：'+e.message}}
-      function calcOmega(){try{const P=+q('owlPeriod').value;let o,msg;if(P>0){o=180/P;msg=`Ω = 180 / P = ${fmt(o)} deg/cm`}else{const L=+q('owlOmegaL').value,a=list(q('owlAlpha').value);if(!(L>0&&a.length))throw Error('请输入有效光程与旋转角');o=mean(a)/L;msg=`旋转角均值 ${fmt(mean(a))}°，标准差 ${fmt(sd(a))}°\nΩ = ${fmt(o)} deg/cm`}state.omega=o;q('owlOmegaValue').textContent=fmt(o);q('owlSimOmega').value=fmt(o);q('owlOmegaResult').textContent=msg}catch(e){q('owlOmegaResult').textContent='错误：'+e.message}}
-      function fitParams(){try{const th=list(q('owlTheta').value),y=list(q('owlIntensity').value),z=+q('owlFitZ').value;if(th.length<4||th.length!==y.length)throw Error('角度和光强须等长且至少 4 点');const model=p=>th.map(t=>p[0]+p[1]*Math.exp(-state.mu*z)*(1-p[2]*Math.cos(2*rad(t+state.omega*z-p[3])))),loss=p=>mean(model(p).map((v,i)=>(v-y[i])**2));let p=[state.bg,state.B,state.V,state.beta],step=[.05,.1,.08,8];for(let k=0;k<90;k++){for(let j=0;j<4;j++){let best=p,bv=loss(p);for(const d of[-1,1]){const c=p.slice();c[j]+=d*step[j];c[1]=Math.max(1e-8,c[1]);c[2]=clamp(c[2],0,1.2);const cv=loss(c);if(cv<bv){best=c;bv=cv}}p=best}step=step.map(x=>x*.94)}state.bg=p[0];state.B=p[1];state.V=p[2];state.beta=((p[3]%180)+180)%180;const f=model(p),ym=mean(y),sse=y.reduce((s,v,i)=>s+(v-f[i])**2,0),sst=y.reduce((s,v)=>s+(v-ym)**2,0);q('owlBValue').textContent=fmt(state.B);q('owlVValue').textContent=fmt(state.V);q('owlBetaValue').textContent=fmt(state.beta);q('owlSimB').value=fmt(state.B);q('owlSimV').value=fmt(state.V);q('owlSimBeta').value=fmt(state.beta);q('owlSimBg').value=fmt(state.bg);plot(q('owlFitPlot'),[{p:th.map((t,i)=>[t,f[i]]),c:'var(--viz-series-4)'}],th.map((t,i)=>[t,y[i],'var(--viz-series-2)']),'起偏器角度（deg）','侧向散射光强');q('owlFitResult').textContent=`背景 ${fmt(state.bg)} · R² ${fmt(1-sse/(sst||1))}`}catch(e){q('owlFitResult').textContent='错误：'+e.message}}
-      function runSim(){try{const mu=+q('owlSimMu').value,o=+q('owlSimOmega').value,B=+q('owlSimB').value,V=+q('owlSimV').value,beta=+q('owlSimBeta').value,bg=+q('owlSimBg').value,zmax=+q('owlZMax').value;if(!(zmax>0&&[mu,o,B,V,beta,bg].every(Number.isFinite)))throw Error('参数无效');const pts=Array.from({length:81},(_,i)=>{const z=zmax*i/80;return[z,bg+B*Math.exp(-mu*z)*(1-V*Math.cos(2*rad(o*z-beta)))]});plot(q('owlSimPlot'),[{p:pts,c:'var(--viz-series-4)'}],[],'传播长度 z（cm）','侧向总光强');q('owlSimResult').textContent=`光强范围 ${fmt(Math.min(...pts.map(p=>p[1])))}–${fmt(Math.max(...pts.map(p=>p[1])))} · 81 个采样点`}catch(e){q('owlSimResult').textContent='错误：'+e.message}}
+      function adjustedScatterParams(){const p={mu:+q('owlSimMu').value,omega:+q('owlSimOmega').value,B:+q('owlSimB').value,V:+q('owlSimV').value,beta:+q('owlSimBeta').value,bg:+q('owlSimBg').value,zmax:+q('owlZMax').value};state.custom.forEach(v=>{const factor=Math.max(.001,1+v.effect*(v.value-v.base)/100);p[v.target]*=factor});return p}
+      function renderScatterCustom(){const listNode=q('owlCustomList');if(!state.custom.length){listNode.innerHTML='<span class="text-small text-muted">尚未添加；仿真使用基础参数。</span>';q('owlCustomResult').textContent='添加变量后，可用滑块改变其值并观察仿真曲线。'}else listNode.replaceChildren(...state.custom.map((v,index)=>{const item=document.createElement('div');item.className='owl-custom-item';const head=document.createElement('div');head.className='owl-custom-head';const title=document.createElement('strong');title.textContent=`${v.name}（${v.symbol}）→ ${v.targetLabel}`;const remove=document.createElement('button');remove.className='btn';remove.type='button';remove.textContent='移除';remove.addEventListener('click',()=>{state.custom.splice(index,1);renderScatterCustom();runSim()});head.append(title,remove);const control=document.createElement('label');control.className='owl-custom-control';const slider=document.createElement('input');slider.className='form-range';slider.type='range';slider.min=v.min;slider.max=v.max;slider.step=v.step;slider.value=v.value;slider.setAttribute('aria-label',`${v.name} 当前值`);const out=document.createElement('output');out.textContent=`${fmt(v.value)} ${v.unit}`;slider.addEventListener('input',()=>{v.value=+slider.value;out.textContent=`${fmt(v.value)} ${v.unit}`;runSim()});control.append(slider,out);const note=document.createElement('span');note.className='owl-help';note.textContent=`基准 ${fmt(v.base)} ${v.unit}；每变化 1 ${v.unit||'单位'}，${v.targetLabel} 改变 ${fmt(v.effect)}%。`;item.append(head,control,note);return item}));runSim()}
+      function addScatterCustom(){const name=q('owlCustomName').value.trim()||'自定义变量',symbol=q('owlCustomSymbol').value.trim()||'x',value=+q('owlCustomValue').value,base=+q('owlCustomBase').value,min=+q('owlCustomMin').value,max=+q('owlCustomMax').value,step=+q('owlCustomStep').value,unit=q('owlCustomUnit').value.trim(),target=q('owlCustomTarget').value,effect=+q('owlCustomEffect').value,targetLabel=q('owlCustomTarget').selectedOptions[0].textContent;if(!([value,base,min,max,step,effect].every(Number.isFinite)&&min<max&&step>0)){q('owlCustomResult').textContent='请检查数值：最小值需小于最大值，步长应为正数，其余字段必须是有效数字。';return}state.custom.push({name,symbol,value:clamp(value,min,max),base,min,max,step,unit,target,effect,targetLabel});renderScatterCustom()}
+      function calcMu(){try{const L=+q('owlMuL').value,r=list(q('owlMuRef').value),s=list(q('owlMuSam').value);if(!(L>0&&r.length&&s.length&&r.every(x=>x>0)&&s.every(x=>x>0)))throw Error('请输入正数光程与光强');const rm=mean(r),sm=mean(s),mu=Math.log(rm/sm)/L;state.mu=mu;q('owlMuValue').textContent=fmt(mu);q('owlSimMu').value=fmt(mu);q('owlMuResult').textContent=`参考均值 ${fmt(rm)}；样品均值 ${fmt(sm)}\nμt = ln(Iref / Isam) / L = ${fmt(mu)} 1/cm\n解释：传播 1 cm 后，指数项约乘以 e^(-μt)。μt 越大，曲线随距离下降越快。`}catch(e){q('owlMuResult').textContent='错误：'+e.message}}
+      function calcOmega(){try{const P=+q('owlPeriod').value;let o,msg;if(P>0){o=180/P;msg=`Ω = 180 / P = ${fmt(o)} deg/cm`}else{const L=+q('owlOmegaL').value,a=list(q('owlAlpha').value);if(!(L>0&&a.length))throw Error('请输入有效光程与旋转角');o=mean(a)/L;msg=`旋转角均值 ${fmt(mean(a))}°，标准差 ${fmt(sd(a))}°\nΩ = ${fmt(o)} deg/cm`}state.omega=o;q('owlOmegaValue').textContent=fmt(o);q('owlSimOmega').value=fmt(o);q('owlOmegaResult').textContent=msg+`\n解释：偏振方向每传播 1 cm 约旋转 ${fmt(o)}°；Ω 越大，空间振荡周期越短。`}catch(e){q('owlOmegaResult').textContent='错误：'+e.message}}
+      function fitParams(){try{const th=list(q('owlTheta').value),y=list(q('owlIntensity').value),z=+q('owlFitZ').value;if(th.length<4||th.length!==y.length)throw Error('角度和光强须等长且至少 4 点');const model=p=>th.map(t=>p[0]+p[1]*Math.exp(-state.mu*z)*(1-p[2]*Math.cos(2*rad(t+state.omega*z-p[3])))),loss=p=>mean(model(p).map((v,i)=>(v-y[i])**2));let p=[state.bg,state.B,state.V,state.beta],step=[.05,.1,.08,8];for(let k=0;k<90;k++){for(let j=0;j<4;j++){let best=p,bv=loss(p);for(const d of[-1,1]){const c=p.slice();c[j]+=d*step[j];c[1]=Math.max(1e-8,c[1]);c[2]=clamp(c[2],0,1.2);const cv=loss(c);if(cv<bv){best=c;bv=cv}}p=best}step=step.map(x=>x*.94)}state.bg=p[0];state.B=p[1];state.V=p[2];state.beta=((p[3]%180)+180)%180;const f=model(p),ym=mean(y),sse=y.reduce((s,v,i)=>s+(v-f[i])**2,0),sst=y.reduce((s,v)=>s+(v-ym)**2,0),r2=1-sse/(sst||1);q('owlBValue').textContent=fmt(state.B);q('owlVValue').textContent=fmt(state.V);q('owlBetaValue').textContent=fmt(state.beta);q('owlSimB').value=fmt(state.B);q('owlSimV').value=fmt(state.V);q('owlSimBeta').value=fmt(state.beta);q('owlSimBg').value=fmt(state.bg);plot(q('owlFitPlot'),[{p:th.map((t,i)=>[t,f[i]]),c:'var(--viz-series-4)'}],th.map((t,i)=>[t,y[i],'var(--viz-series-2)']),'起偏器角度（deg）','侧向散射光强');q('owlFitResult').textContent=`背景 ${fmt(state.bg)} · R² ${fmt(r2)}\n解释：B=${fmt(state.B)} 表示主体强度，V=${fmt(state.V)} 表示振荡可见度，β=${fmt(state.beta)}° 表示相位位置；${r2>.9?'本组数据与模型吻合较好':r2>.7?'本组数据与模型基本吻合，但仍有明显残差':'拟合度偏低，建议检查异常点、测量误差或模型假设'}。`}catch(e){q('owlFitResult').textContent='错误：'+e.message}}
+      function runSim(){try{const p=adjustedScatterParams(),mu=p.mu,o=p.omega,B=p.B,V=p.V,beta=p.beta,bg=p.bg,zmax=p.zmax;if(!(zmax>0&&[mu,o,B,V,beta,bg].every(Number.isFinite)))throw Error('参数无效');const pts=Array.from({length:81},(_,i)=>{const z=zmax*i/80;return[z,bg+B*Math.exp(-mu*z)*(1-V*Math.cos(2*rad(o*z-beta)))]}),lo=Math.min(...pts.map(v=>v[1])),hi=Math.max(...pts.map(v=>v[1])),extra=state.custom.length?`；已叠加 ${state.custom.length} 个自定义变量`:'；未叠加自定义变量';plot(q('owlSimPlot'),[{p:pts,c:'var(--viz-series-4)'}],[],'传播长度 z（cm）','侧向总光强');plot(q('owlCustomPlot'),[{p:pts,c:'var(--viz-series-2)',w:3}],[],'传播长度 z（cm）','自定义后总光强');q('owlSimResult').textContent=`光强范围 ${fmt(lo)}–${fmt(hi)} · 81 个采样点${extra}。曲线下降速度主要由 μt 决定，起伏间距主要由 Ω 决定，起伏深度主要由 V 决定。`;q('owlCustomResult').textContent=state.custom.length?`叠加后参数：μt=${fmt(mu)} 1/cm，Ω=${fmt(o)} deg/cm，B=${fmt(B)}，V=${fmt(V)}，β=${fmt(beta)}°，背景=${fmt(bg)}，zmax=${fmt(zmax)} cm。光强范围 ${fmt(lo)}–${fmt(hi)}。`:'添加变量后，可用滑块改变其值并观察仿真曲线。'}catch(e){q('owlSimResult').textContent='错误：'+e.message;q('owlCustomResult').textContent='错误：'+e.message}}
       qa('.owl-tabs .btn').forEach(b=>b.addEventListener('click',()=>{qa('.owl-tabs .btn').forEach(x=>x.setAttribute('aria-selected',String(x===b)));q('owlAfter').hidden=b.id!=='owlAfterTab';q('owlScatter').hidden=b.id!=='owlScatterTab';q('owlRGB').hidden=b.id!=='owlRGBTab'}));
-      qa('[data-owl-step]').forEach(b=>b.addEventListener('click',()=>{qa('[data-owl-step]').forEach(x=>x.setAttribute('aria-selected',String(x===b)));qa('[data-owl-panel]').forEach(p=>p.hidden=p.dataset.owlPanel!==b.dataset.owlStep)}));
-      qa('[data-rgb-step]').forEach(b=>b.addEventListener('click',()=>{qa('[data-rgb-step]').forEach(x=>x.setAttribute('aria-selected',String(x===b)));qa('[data-rgb-panel]').forEach(p=>p.hidden=p.dataset.rgbPanel!==b.dataset.rgbStep);if(b.dataset.rgbStep==='spectrum')updateSpectrum()}));
-      ['owlTemp','owlExposure','owlAfterMode'].forEach(id=>q(id).addEventListener('input',updateAfter));q('owlCut').addEventListener('click',cut);q('owlCalcMu').addEventListener('click',calcMu);q('owlCalcOmega').addEventListener('click',calcOmega);q('owlCalcFit').addEventListener('click',fitParams);q('owlRunSim').addEventListener('click',runSim);
-      ['rgbR','rgbG','rgbB'].forEach(id=>q(id).addEventListener('input',updateRgb));['rgbSpectrumMode','rgbDelta','rgbLightSource','rgbBias'].forEach(id=>q(id).addEventListener('input',updateSpectrum));q('rgbAnalyze').addEventListener('click',updateRgb);q('rgbImageFile').addEventListener('change',e=>loadImageFile(e.target.files[0]));q('rgbImageCanvas').addEventListener('click',pickImage);q('rgbZoom').addEventListener('input',()=>{const z=+q('rgbZoom').value;q('rgbZoomOut').textContent=z;q('rgbImageCanvas').style.width=z+'%'});q('rgbPcaImageFile').addEventListener('change',e=>loadImageFile(e.target.files[0],'calibration'));q('rgbPcaFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const reader=new FileReader();reader.onload=()=>{try{rgbState.pcaTable=parsePcaCsv(reader.result);q('rgbPcaWaves').textContent=rgbState.pcaTable.waves.length;q('rgbPcaSamples').textContent=rgbState.pcaTable.samples.length;q('rgbPcaStatus').textContent=`已读取 ${f.name}：${rgbState.pcaTable.waves.length} 个波长点、${rgbState.pcaTable.samples.length} 个校准样本。`;plot(q('rgbPcaPlot'),rgbState.pcaTable.samples.slice(0,5).map((s,i)=>({p:rgbState.pcaTable.waves.map((w,j)=>[w,normalize(s)[j]]),c:`var(--viz-series-${i+1})`})),[],'波长（nm）','归一化校准光谱')}catch(err){q('rgbPcaStatus').textContent='CSV 读取失败：'+err.message}};reader.readAsText(f)});q('rgbPcaComponents').addEventListener('input',()=>q('rgbPcaComponentsOut').textContent=q('rgbPcaComponents').value);q('rgbTrainPca').addEventListener('click',trainPca);q('rgbSavePca').addEventListener('click',exportPca);q('rgbLoadPca').addEventListener('change',e=>importPca(e.target.files[0]));
-      drawDemoImage();updateAfter();updateRgb();
+      qa('[data-owl-step]').forEach(b=>b.addEventListener('click',()=>{qa('[data-owl-step]').forEach(x=>x.setAttribute('aria-selected',String(x===b)));qa('[data-owl-panel]').forEach(p=>p.hidden=p.dataset.owlPanel!==b.dataset.owlStep);if(b.dataset.owlStep==='custom')runSim()}));
+      qa('[data-rgb-step]').forEach(b=>b.addEventListener('click',()=>{qa('[data-rgb-step]').forEach(x=>x.setAttribute('aria-selected',String(x===b)));qa('[data-rgb-panel]').forEach(p=>p.hidden=p.dataset.rgbPanel!==b.dataset.rgbStep);if(b.dataset.rgbStep==='spectrum'||b.dataset.rgbStep==='custom')updateSpectrum()}));
+      ['owlTemp','owlExposure','owlAfterMode'].forEach(id=>q(id).addEventListener('input',updateAfter));q('owlCut').addEventListener('click',cut);q('owlCalcMu').addEventListener('click',calcMu);q('owlCalcOmega').addEventListener('click',calcOmega);q('owlCalcFit').addEventListener('click',fitParams);q('owlRunSim').addEventListener('click',runSim);q('owlAddCustom').addEventListener('click',addScatterCustom);
+      ['rgbR','rgbG','rgbB'].forEach(id=>q(id).addEventListener('input',updateRgb));['rgbSpectrumMode','rgbDelta','rgbLightSource','rgbBias'].forEach(id=>q(id).addEventListener('input',updateSpectrum));q('rgbAnalyze').addEventListener('click',updateRgb);q('rgbAddCustom').addEventListener('click',addRgbCustom);q('rgbImageFile').addEventListener('change',e=>loadImageFile(e.target.files[0]));q('rgbImageCanvas').addEventListener('click',pickImage);q('rgbZoom').addEventListener('input',()=>{const z=+q('rgbZoom').value;q('rgbZoomOut').textContent=z;q('rgbImageCanvas').style.width=z+'%'});q('rgbPcaImageFile').addEventListener('change',e=>loadImageFile(e.target.files[0],'calibration'));q('rgbPcaFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const reader=new FileReader();reader.onload=()=>{try{rgbState.pcaTable=parsePcaCsv(reader.result);q('rgbPcaWaves').textContent=rgbState.pcaTable.waves.length;q('rgbPcaSamples').textContent=rgbState.pcaTable.samples.length;q('rgbPcaStatus').textContent=`已读取 ${f.name}：${rgbState.pcaTable.waves.length} 个波长点、${rgbState.pcaTable.samples.length} 个校准样本。`;plot(q('rgbPcaPlot'),rgbState.pcaTable.samples.slice(0,5).map((s,i)=>({p:rgbState.pcaTable.waves.map((w,j)=>[w,normalize(s)[j]]),c:`var(--viz-series-${i+1})`})),[],'波长（nm）','归一化校准光谱')}catch(err){q('rgbPcaStatus').textContent='CSV 读取失败：'+err.message}};reader.readAsText(f)});q('rgbPcaComponents').addEventListener('input',()=>q('rgbPcaComponentsOut').textContent=q('rgbPcaComponents').value);q('rgbTrainPca').addEventListener('click',trainPca);q('rgbSavePca').addEventListener('click',exportPca);q('rgbLoadPca').addEventListener('change',e=>importPca(e.target.files[0]));
+      drawDemoImage();updateAfter();updateRgb();runSim();
     })();
   </script>
 </div>
 </main>
-    <footer class="app-footer"><span>© 2026 姜润扬 · 华东师范大学物理学院 · 深圳零一学院</span><span>非迪士尼官方学生研究页面 · 角色主题仅用于学习展示</span></footer>
+    <footer class="app-footer">LumiTrace · 面向光学实验学习与研究的本地交互工具</footer>
   </div>
-  <script>
-    (() => {
-      const themes = {
-        linabell: { name: "玲娜贝儿", copy: "跟随玲娜贝儿的好奇心，在梦幻光学花园里发现光的秘密。" },
-        duffy: { name: "达菲", copy: "和达菲一起，用温暖而耐心的实验观察理解每一道光。" },
-        shelliemay: { name: "雪莉玫", copy: "和雪莉玫一起细心记录，让每组实验数据都讲出清晰的故事。" },
-        gelatoni: { name: "杰拉多尼", copy: "和杰拉多尼一起把光谱变成画布，探索色彩与物理的交会。" },
-        stellalou: { name: "星黛露", copy: "和星黛露一起追逐星光，在变化的曲线中寻找规律。" },
-        cookieann: { name: "可琦安", copy: "和可琦安一起大胆尝试，用灵感组合新的实验参数。" },
-        olumel: { name: "奥乐米拉", copy: "和奥乐米拉一起聆听光的节奏，发现数据变化的韵律。" }
-      };
-      const buttons = Array.from(document.querySelectorAll("[data-theme-choice]"));
-      const themeName = document.getElementById("themeName");
-      const heroCopy = document.querySelector(".hero-copy");
-      const chooseTheme = (key, persist = true) => {
-        const theme = themes[key] || themes.linabell;
-        const selectedKey = themes[key] ? key : "linabell";
-        document.documentElement.dataset.theme = selectedKey;
-        buttons.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.themeChoice === selectedKey)));
-        if (themeName) themeName.textContent = theme.name;
-        if (heroCopy) heroCopy.textContent = theme.copy + " 从冰洲石红光余晖到旋光散射，再到 RGB 主波长与光谱重建，自由探索三个独立课题。";
-        if (persist) try { localStorage.setItem("lumitrace-theme", selectedKey); } catch {}
-      };
-      buttons.forEach(button => button.addEventListener("click", () => chooseTheme(button.dataset.themeChoice)));
-      chooseTheme(document.documentElement.dataset.theme, false);
-    })();
-  </script>
 </body>
 </html>
