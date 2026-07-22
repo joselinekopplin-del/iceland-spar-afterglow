@@ -22,8 +22,10 @@
 .app-main{padding:clamp(14px,2.4vw,28px);border:1px solid var(--border);border-radius:26px;background:var(--glass);box-shadow:0 26px 72px var(--shadow);backdrop-filter:blur(24px)}.app-footer{margin:18px 4px 0;padding:18px 4px;color:var(--muted-foreground);font-size:.84rem;border-top:1px solid var(--border)}.card{position:relative;padding:18px;color:var(--card-foreground);background:var(--card);border:1px solid var(--border);border-radius:18px;box-shadow:0 10px 32px var(--shadow)}.viz-grid{display:grid;gap:12px}.viz-stat{display:grid;gap:4px}.viz-stat-value{font-size:1.5rem;font-weight:500;letter-spacing:-.035em;font-variant-numeric:tabular-nums}.viz-badge{display:inline-flex;width:fit-content;margin-bottom:8px;padding:5px 10px;border-radius:999px;color:var(--accent-foreground);background:var(--accent);font-size:.78rem;font-weight:500}.text-small{font-size:.86rem}.text-muted{color:var(--muted-foreground)}.form-label{color:var(--foreground)}.form-control,.form-select{width:100%;padding:10px 11px;color:var(--foreground);background:var(--card);border:1px solid var(--input);border-radius:10px;outline:none}.form-range{width:100%;height:28px;accent-color:var(--viz-series-1);cursor:pointer}.form-control:focus,.form-select:focus,.form-range:focus-visible{border-color:var(--ring);outline:3px solid color-mix(in srgb,var(--ring) 22%,transparent);outline-offset:1px}.btn{appearance:none;border:1px solid var(--border);border-radius:10px;padding:9px 14px;color:var(--secondary-foreground);background:var(--secondary);cursor:pointer;font-weight:500;transition:transform .18s ease,box-shadow .18s ease}.btn:hover{transform:translateY(-1px);box-shadow:0 7px 18px var(--shadow)}.btn:focus-visible{outline:3px solid color-mix(in srgb,var(--ring) 35%,transparent);outline-offset:2px}.btn-primary{color:var(--primary-foreground);background:var(--primary);border-color:var(--primary)}.btn[aria-selected="true"]{color:var(--primary-foreground);background:var(--primary);border-color:var(--primary)}
 #opticsWorkbenchLite .owl-tabs{position:sticky;top:84px;z-index:12;padding:5px;border:1px solid var(--border);border-radius:14px;background:color-mix(in srgb,var(--glass) 94%,transparent);box-shadow:0 9px 28px var(--shadow);backdrop-filter:blur(22px)}#opticsWorkbenchLite .owl-tabs .btn{flex:1 1 280px}#opticsWorkbenchLite .owl-steps{padding:5px;border:1px solid var(--border);border-radius:13px;background:color-mix(in srgb,var(--muted) 78%,transparent)}#opticsWorkbenchLite .owl-plot{border-radius:16px;background:color-mix(in srgb,var(--muted) 45%,transparent)}#opticsWorkbenchLite .owl-result{padding:11px 13px;border-inline-start:3px solid var(--viz-series-1);border-radius:0 12px 12px 0;background:color-mix(in srgb,var(--muted) 60%,transparent)}#opticsWorkbenchLite .owl-crystal{border-radius:9px;transition:opacity .12s linear,transform .4s ease}
 .app-main{border-color:color-mix(in srgb,var(--border) 82%,transparent);border-radius:24px;box-shadow:0 30px 80px var(--shadow),inset 0 1px color-mix(in srgb,var(--card) 78%,transparent);backdrop-filter:blur(30px) saturate(150%);-webkit-backdrop-filter:blur(30px) saturate(150%)}.card{border-color:color-mix(in srgb,var(--border) 84%,transparent);border-radius:16px;box-shadow:0 9px 28px color-mix(in srgb,var(--shadow) 74%,transparent),inset 0 1px color-mix(in srgb,var(--card) 90%,transparent)}
-body[data-window-state="closed"] .hero,body[data-window-state="closed"] .app-main,body[data-window-state="closed"] .app-footer{display:none}body[data-window-state="closed"] .app-shell{min-height:100vh}body[data-window-state="minimized"] .hero{display:none}body.focus-mode .app-shell{width:100%;max-width:none;padding:8px}body.focus-mode .hero{display:none}body.focus-mode .app-header{top:8px}body.focus-mode .app-main{border-radius:18px}.app-shell:fullscreen{width:100%;height:100%;overflow:auto;padding:10px;background:var(--background)}.app-shell:fullscreen .hero{display:none}.app-shell:fullscreen .app-header{top:8px}.app-shell:fullscreen .app-main{border-radius:18px}
-@media(max-width:760px){.app-shell{width:min(100% - 20px,1280px);padding-top:10px}.app-header{top:7px}.app-status,.window-state{display:none}.hero{grid-template-columns:1fr;min-height:auto;padding:30px 22px}.optical-orbit{width:min(220px,68vw)}.brand p{display:none}.app-main{padding:12px}#opticsWorkbenchLite .owl-tabs{top:72px}}@media(max-width:440px){.header-actions{gap:5px}.brand-mark{display:none}.traffic-lights{gap:5px}.window-control{width:10px;height:10px}.team-menu>summary{padding:8px 9px}.hero h2{font-size:3.4rem}.team-panel{position:fixed;right:10px;top:72px}.card{padding:14px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.window-control,#opticsWorkbenchLite .owl-crystal{transition:none}}
+.hero-copy-block{min-width:0}.hero-features{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:20px}.hero-feature{display:grid;gap:3px;padding:11px 12px;border:1px solid var(--border);border-radius:13px;background:color-mix(in srgb,var(--card) 72%,transparent);backdrop-filter:blur(12px)}.hero-feature strong{font-weight:500}.hero-feature span{color:var(--muted-foreground);font-size:.8rem}.hero-side{display:grid;place-items:center;gap:12px}.hero-privacy{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid var(--border);border-radius:999px;color:var(--muted-foreground);background:color-mix(in srgb,var(--card) 72%,transparent);font-size:.78rem}.hero-privacy::before{content:"●";color:var(--viz-series-4);font-size:.64rem}
+.lumi-ai-launch{position:fixed;right:max(22px,env(safe-area-inset-right));bottom:max(22px,env(safe-area-inset-bottom));z-index:80;display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border:1px solid color-mix(in srgb,var(--primary) 35%,var(--border));border-radius:999px;color:var(--primary-foreground);background:linear-gradient(145deg,var(--primary),color-mix(in srgb,var(--primary) 72%,var(--viz-series-2)));box-shadow:0 16px 42px color-mix(in srgb,var(--primary) 34%,transparent);cursor:pointer;font-weight:500;transition:transform .22s cubic-bezier(.22,1,.36,1),box-shadow .22s ease}.lumi-ai-launch::before{content:"✦"}.lumi-ai-launch:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 20px 50px color-mix(in srgb,var(--primary) 42%,transparent)}.lumi-ai-launch:focus-visible{outline:3px solid color-mix(in srgb,var(--ring) 44%,transparent);outline-offset:3px}.lumi-ai-panel{position:fixed;right:max(22px,env(safe-area-inset-right));bottom:max(82px,calc(env(safe-area-inset-bottom) + 72px));z-index:79;width:min(400px,calc(100vw - 28px));max-height:min(650px,calc(100vh - 120px));overflow:hidden;border:1px solid var(--border);border-radius:20px;color:var(--popover-foreground);background:color-mix(in srgb,var(--popover) 91%,transparent);box-shadow:0 28px 80px rgba(0,0,0,.24),inset 0 1px color-mix(in srgb,var(--card) 86%,transparent);backdrop-filter:blur(34px) saturate(170%);-webkit-backdrop-filter:blur(34px) saturate(170%);animation:lumiAiOpen .28s cubic-bezier(.22,1,.36,1) both}.lumi-ai-panel[hidden]{display:none}.lumi-ai-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px;border-bottom:1px solid var(--border)}.lumi-ai-title{display:flex;align-items:center;gap:9px}.lumi-ai-orb{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;color:#fff;background:linear-gradient(145deg,var(--viz-series-1),var(--viz-series-2));box-shadow:0 7px 18px color-mix(in srgb,var(--primary) 24%,transparent)}.lumi-ai-title strong{display:block;font-weight:500}.lumi-ai-title span{display:block;color:var(--muted-foreground);font-size:.74rem}.lumi-ai-head-actions{display:flex;gap:6px}.lumi-ai-icon{display:grid;place-items:center;width:28px;height:28px;padding:0;border:0;border-radius:8px;color:var(--foreground);background:var(--secondary);cursor:pointer}.lumi-ai-body{display:grid;gap:10px;padding:12px 14px}.lumi-ai-panel.is-minimized .lumi-ai-body{display:none}.lumi-ai-messages{display:grid;gap:8px;max-height:290px;overflow:auto;padding:2px}.lumi-ai-bubble{width:fit-content;max-width:91%;padding:9px 11px;border-radius:14px;background:var(--muted);white-space:pre-line}.lumi-ai-bubble.is-user{justify-self:end;color:var(--primary-foreground);background:var(--primary)}.lumi-ai-quick{display:flex;gap:6px;overflow:auto;padding-bottom:2px}.lumi-ai-chip{flex:0 0 auto;padding:6px 9px;border:1px solid var(--border);border-radius:999px;color:var(--secondary-foreground);background:var(--secondary);cursor:pointer;font-size:.78rem}.lumi-ai-compose{display:grid;grid-template-columns:1fr auto;gap:7px}.lumi-ai-compose input{min-width:0;padding:10px 11px;border:1px solid var(--input);border-radius:11px;color:var(--foreground);background:var(--card);outline:none}.lumi-ai-compose input:focus{border-color:var(--ring);outline:3px solid color-mix(in srgb,var(--ring) 20%,transparent)}.lumi-ai-send{padding:9px 12px;border:0;border-radius:10px;color:var(--primary-foreground);background:var(--primary);cursor:pointer}.lumi-ai-note{color:var(--muted-foreground);font-size:.72rem;text-align:center}@keyframes lumiAiOpen{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+body[data-window-state="closed"] .app-main,body[data-window-state="closed"] .app-footer{display:none}body[data-window-state="closed"] .app-shell{min-height:100vh}body[data-window-state="closed"] .hero{margin-bottom:0}body[data-window-state="minimized"] .hero{display:none}body.focus-mode .app-shell{width:100%;max-width:none;padding:8px}body.focus-mode .hero{display:none}body.focus-mode .app-header{top:8px}body.focus-mode .app-main{border-radius:18px}.app-shell:fullscreen{width:100%;height:100%;overflow:auto;padding:10px;background:var(--background)}.app-shell:fullscreen .hero{display:none}.app-shell:fullscreen .app-header{top:8px}.app-shell:fullscreen .app-main{border-radius:18px}
+@media(max-width:760px){.app-shell{width:min(100% - 20px,1280px);padding-top:10px}.app-header{top:7px}.app-status,.window-state{display:none}.hero{grid-template-columns:1fr;min-height:auto;padding:30px 22px}.hero-features{grid-template-columns:1fr}.optical-orbit{width:min(200px,60vw)}.brand p{display:none}.app-main{padding:12px}#opticsWorkbenchLite .owl-tabs{top:72px}.lumi-ai-panel{right:14px;bottom:78px;max-height:calc(100vh - 102px)}.lumi-ai-launch{right:14px;bottom:14px}}@media(max-width:440px){.header-actions{gap:5px}.brand-mark{display:none}.traffic-lights{gap:5px}.window-control{width:10px;height:10px}.team-menu>summary{padding:8px 9px}.hero h2{font-size:3.4rem}.team-panel{position:fixed;right:10px;top:72px}.card{padding:14px}.lumi-ai-launch span{display:none}.lumi-ai-launch{padding:13px}.lumi-ai-messages{max-height:240px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.window-control,.lumi-ai-launch,#opticsWorkbenchLite .owl-crystal{transition:none}.lumi-ai-panel{animation:none}}
 </style>
 </head>
 <body>
@@ -32,7 +34,7 @@ body[data-window-state="closed"] .hero,body[data-window-state="closed"] .app-mai
       <div class="toolbar-start"><div class="traffic-lights" role="group" aria-label="窗口控制"><button class="window-control window-close" id="windowClose" type="button" data-hint="收起工作区" aria-label="收起或恢复研究工作区" aria-pressed="false"></button><button class="window-control window-minimize" id="windowMinimize" type="button" data-hint="最小化项目介绍" aria-label="最小化或展开项目介绍" aria-pressed="false"></button><button class="window-control window-fullscreen" id="windowFullscreen" type="button" data-hint="全屏研究模式" aria-label="进入或退出全屏研究模式" aria-pressed="false"></button></div><span class="window-state" id="windowStateText" aria-live="polite">标准视图</span><div class="brand"><div class="brand-mark" aria-hidden="true"><span>λ</span></div><div><h1>光迹 · LumiTrace</h1><p>多维光学现象交互研究平台</p></div></div></div>
       <div class="header-actions"><span class="app-status"><span class="status-dot"></span>离线计算 · 数据留在本机</span><details class="team-menu"><summary>关于团队</summary><div class="team-panel"><h2>项目团队</h2><div class="team-list"><div class="team-person"><span class="team-role">作者</span><div><strong>姜润扬</strong><span>华东师范大学物理学院 · 深圳零一学院</span></div></div><div class="team-person"><span class="team-role">组员</span><div><strong>韩旭熙</strong><span>南昌大学</span></div></div><div class="team-person"><span class="team-role">组员</span><div><strong>尹相儒</strong><span>大连理工大学</span></div></div></div></div></details></div>
     </header>
-    <section class="hero" aria-labelledby="heroTitle"><div><p class="eyebrow" lang="en">LumiTrace — Interactive Optical Research Platform</p><h2 id="heroTitle">光迹</h2><p class="hero-project-name">多维光学现象交互研究平台</p><p class="hero-copy">将实验数据、物理公式、文件分析与实时拟合放在同一工作台中。课题二和课题三现已内置 Lumi AI 本地实验助手，可直接读取数据文件并生成拟合图。</p></div><div class="optical-orbit" aria-hidden="true"><span class="optical-core"></span></div></section>
+    <section class="hero" aria-labelledby="heroTitle"><div class="hero-copy-block"><p class="eyebrow" lang="en">LumiTrace — Interactive Optical Research Platform</p><h2 id="heroTitle">光迹</h2><p class="hero-project-name">多维光学现象交互研究平台</p><p class="hero-copy">光迹把实验数据、物理模型、拟合曲线与结果解释组织在同一工作台中。平台面向光学实验的学习、探索与复核，让初学者能看懂每个参数，也让研究者能快速比较数据与模型。</p><div class="hero-features"><div class="hero-feature"><strong>课题一 · 红光余晖</strong><span>研究冰洲石在不同温度与紫光照射时间下，切断激发后的红光停留规律。</span></div><div class="hero-feature"><strong>课题二 · 旋光散射</strong><span>计算衰减与旋光速率，拟合散射参数，并上传自定义数据生成传播曲线。</span></div><div class="hero-feature"><strong>课题三 · RGB 光谱</strong><span>从颜色、图片或校准数据估计主波长，重建光谱并比较多种峰形模型。</span></div></div></div><div class="hero-side"><div class="optical-orbit" aria-hidden="true"><span class="optical-core"></span></div><span class="hero-privacy">文件本地处理 · Lumi AI 随时解答操作问题</span></div></section>
     <main class="app-main"><div id="opticsWorkbenchLite">
   <style>
     #opticsWorkbenchLite{width:100%;min-width:0;color:var(--foreground)}
@@ -510,6 +512,11 @@ body[data-window-state="closed"] .hero,body[data-window-state="closed"] .app-mai
 </main>
     <footer class="app-footer">LumiTrace · 面向光学实验学习与研究的本地交互工具</footer>
   </div>
+  <button class="lumi-ai-launch" id="lumiAiLaunch" type="button" aria-controls="lumiAiPanel" aria-expanded="false"><span>Lumi AI</span></button>
+  <section class="lumi-ai-panel" id="lumiAiPanel" aria-label="Lumi AI 页面操作助手" hidden>
+    <header class="lumi-ai-head"><div class="lumi-ai-title"><span class="lumi-ai-orb" aria-hidden="true">✦</span><div><strong>Lumi AI</strong><span>页面操作与实验导航助手</span></div></div><div class="lumi-ai-head-actions"><button class="lumi-ai-icon" id="lumiAiMinimize" type="button" aria-label="最小化助手">—</button><button class="lumi-ai-icon" id="lumiAiClose" type="button" aria-label="关闭助手">×</button></div></header>
+    <div class="lumi-ai-body"><div class="lumi-ai-messages" id="lumiAiMessages" aria-live="polite"><div class="lumi-ai-bubble">你好，我是 Lumi AI。你可以问我页面怎么操作，也可以说“带我去课题二上传文件”，我会直接打开对应位置。</div></div><div class="lumi-ai-quick" aria-label="常用问题"><button class="lumi-ai-chip" type="button" data-lumi-question="这个平台怎么开始使用？">如何开始</button><button class="lumi-ai-chip" type="button" data-lumi-question="怎么上传文件并生成拟合图？">上传与拟合</button><button class="lumi-ai-chip" type="button" data-lumi-question="红黄绿三个按钮有什么功能？">窗口按钮</button><button class="lumi-ai-chip" type="button" data-lumi-question="三个课题有什么区别？">课题区别</button></div><div class="lumi-ai-compose"><input id="lumiAiInput" autocomplete="off" placeholder="例如：带我去课题三上传光谱"><button class="lumi-ai-send" id="lumiAiSend" type="button">发送</button></div><div class="lumi-ai-note">本地操作助手 · 不上传实验文件或聊天内容</div></div>
+  </section>
   <script>
     (() => {
       const shell = document.querySelector('.app-shell');
@@ -517,14 +524,104 @@ body[data-window-state="closed"] .hero,body[data-window-state="closed"] .app-mai
       const minimizeButton = document.getElementById('windowMinimize');
       const fullscreenButton = document.getElementById('windowFullscreen');
       const stateText = document.getElementById('windowStateText');
+      const aiLaunch = document.getElementById('lumiAiLaunch');
+      const aiPanel = document.getElementById('lumiAiPanel');
+      const aiMinimize = document.getElementById('lumiAiMinimize');
+      const aiClose = document.getElementById('lumiAiClose');
+      const aiMessages = document.getElementById('lumiAiMessages');
+      const aiInput = document.getElementById('lumiAiInput');
+      const addAiMessage = (text, user = false) => {
+        const bubble = document.createElement('div');
+        bubble.className = 'lumi-ai-bubble' + (user ? ' is-user' : '');
+        bubble.textContent = text;
+        aiMessages.append(bubble);
+        aiMessages.scrollTop = aiMessages.scrollHeight;
+      };
+      const openAi = () => {
+        aiPanel.hidden = false;
+        aiPanel.classList.remove('is-minimized');
+        aiLaunch.setAttribute('aria-expanded', 'true');
+        aiInput.focus();
+      };
+      const closeAi = () => {
+        aiPanel.hidden = true;
+        aiLaunch.setAttribute('aria-expanded', 'false');
+        aiLaunch.focus();
+      };
+      const currentPageContext = () => {
+        const project = document.querySelector('#opticsWorkbenchLite .owl-tabs [aria-selected="true"]')?.textContent?.trim() || '项目介绍';
+        const scatterStep = document.querySelector('#opticsWorkbenchLite [data-owl-step][aria-selected="true"]')?.textContent?.trim();
+        const rgbStep = document.querySelector('#opticsWorkbenchLite [data-rgb-step][aria-selected="true"]')?.textContent?.trim();
+        return project.includes('课题二') && scatterStep ? project + '，' + scatterStep : project.includes('课题三') && rgbStep ? project + '，' + rgbStep : project;
+      };
+      const navigateTo = (project, step) => {
+        setWindowState('normal');
+        const tabs = { after: 'owlAfterTab', scatter: 'owlScatterTab', rgb: 'owlRGBTab' };
+        document.getElementById(tabs[project])?.click();
+        if (project === 'scatter' && step) document.querySelector('[data-owl-step="' + step + '"]')?.click();
+        if (project === 'rgb' && step) document.querySelector('[data-rgb-step="' + step + '"]')?.click();
+        document.querySelector('.app-main')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      };
+      const answerOperationQuestion = (question) => {
+        const text = question.toLowerCase();
+        const wantsNavigation = /带我|打开|进入|跳转|前往/.test(question);
+        let route = null;
+        let answer = '';
+        if (/红黄绿|三个点|窗口按钮|红色|黄色|绿色|全屏|收起/.test(question)) {
+          answer = '红色按钮会收起或恢复实验工作区，但始终保留项目介绍；黄色按钮会隐藏或展开项目介绍；绿色按钮进入全屏研究模式，不支持全屏时会切换为专注模式。所有操作都会保留当前实验参数。';
+        } else if (/三个课题|课题区别|有什么区别|区别/.test(question)) {
+          answer = '课题一研究冰洲石红光余晖，核心变量是温度和紫光照射时间；课题二研究独立的旋光散射，关注衰减、旋光速率与传播模型；课题三研究 RGB、主波长和光谱重建。课题二与三都支持上传自己的数据并生成拟合图。';
+        } else if (/上传|csv|txt|json|文件|拟合图/.test(text)) {
+          const current = currentPageContext();
+          answer = '上传与拟合位于课题二或课题三的“5 自定义参数”。进入后选择 CSV、TXT 或 JSON，Lumi AI 会识别数值列；确认横轴、纵轴和模型后，右侧会显示原始点、拟合曲线、方程和 R²。文件只在本机处理。';
+          if (wantsNavigation) route = current.includes('课题三') || /课题三|rgb|光谱/.test(text) ? ['rgb','custom'] : ['scatter','custom'];
+        } else if (/课题一|余晖|冰洲石/.test(text)) {
+          answer = '课题一研究切断紫光后冰洲石红光余晖的停留时间。调节温度、照射时间和估计方式后，曲线、区间、敏感性与文字分析会同步更新。';
+          if (wantsNavigation) route = ['after',null];
+        } else if (/课题二|旋光|散射/.test(text)) {
+          answer = '课题二是独立的旋光散射研究，依次计算衰减系数 μt、旋光速率 Ω、拟合 B/V/β，再进行传播仿真；自定义参数页支持上传实验表格并自动拟合。';
+          if (wantsNavigation) route = ['scatter',/上传|文件|ai|自定义/.test(text)?'custom':'mu'];
+        } else if (/课题三|rgb|光谱|主波长|颜色/.test(text)) {
+          answer = '课题三从 RGB、图片选点或校准数据估计主波长与光谱。自定义参数页可上传波长—强度数据，自动比较高斯、洛伦兹和二次模型。';
+          if (wantsNavigation) route = ['rgb',/上传|文件|ai|自定义/.test(text)?'custom':'pixel'];
+        } else if (/r²|r2|拟合|模型|参数|异常/.test(text)) {
+          answer = 'R² 越接近 1，模型对当前数据变化的解释越充分，但不能单独证明模型正确。请同时检查残差、异常点、实验单位和独立重复数据。课题二/三的本地分析助手还能针对上传文件解释参数与异常点。';
+        } else if (/作者|团队|组员|关于/.test(text)) {
+          answer = '点击右上角“关于团队”可查看作者与组员信息。作者为姜润扬；组员包括南昌大学韩旭熙、大连理工大学尹相儒。';
+          if (wantsNavigation) document.querySelector('.team-menu').open = true;
+        } else if (/隐私|安全吗|联网|上传到哪里|api/.test(text)) {
+          answer = '实验文件、拟合过程和这段操作问答都在浏览器本地完成，不会发送到服务器，也不需要填写 API 密钥。刷新页面后，本地临时分析状态会清空。';
+        } else if (/开始|怎么用|如何使用|操作|帮助/.test(text)) {
+          answer = '建议先在顶部选择一个课题，再按编号从第 1 步开始。课题一直接调节温度和照射时间；课题二按 μt→Ω→参数拟合→仿真；课题三按 RGB→光谱→图片→PCA。需要分析自己的数据时进入课题二或三的“5 自定义参数”。';
+        } else {
+          answer = '你当前位于“' + currentPageContext() + '”。我可以说明三个课题、参数与拟合结果，也能回答窗口按钮、文件上传、图片选点、PCA 和自定义参数的操作。你还可以直接说“带我去课题三上传文件”。';
+        }
+        return { answer, route };
+      };
+      const submitAiQuestion = (preset) => {
+        const question = String(preset || aiInput.value).trim();
+        if (!question) return;
+        openAi();
+        addAiMessage(question, true);
+        aiInput.value = '';
+        const result = answerOperationQuestion(question);
+        addAiMessage(result.answer);
+        if (result.route) setTimeout(() => navigateTo(...result.route), 180);
+      };
       const setWindowState = (next) => {
         document.body.dataset.windowState = next;
         closeButton.setAttribute('aria-pressed', String(next === 'closed'));
         minimizeButton.setAttribute('aria-pressed', String(next === 'minimized'));
         closeButton.dataset.hint = next === 'closed' ? '恢复工作区' : '收起工作区';
         minimizeButton.dataset.hint = next === 'minimized' ? '展开项目介绍' : '最小化项目介绍';
-        stateText.textContent = next === 'closed' ? '工作区已收起 · 点击红色恢复' : next === 'minimized' ? '介绍已最小化' : '标准视图';
+        stateText.textContent = next === 'closed' ? '实验工作区已收起 · 项目介绍保留' : next === 'minimized' ? '介绍已最小化' : '标准视图';
       };
+      aiLaunch.addEventListener('click', () => aiPanel.hidden ? openAi() : closeAi());
+      aiClose.addEventListener('click', closeAi);
+      aiMinimize.addEventListener('click', () => { aiPanel.classList.toggle('is-minimized'); aiMinimize.textContent = aiPanel.classList.contains('is-minimized') ? '＋' : '—'; });
+      document.getElementById('lumiAiSend').addEventListener('click', () => submitAiQuestion());
+      aiInput.addEventListener('keydown', event => { if (event.key === 'Enter') submitAiQuestion(); if (event.key === 'Escape') closeAi(); });
+      document.querySelectorAll('[data-lumi-question]').forEach(button => button.addEventListener('click', () => submitAiQuestion(button.dataset.lumiQuestion)));
       closeButton.addEventListener('click', () => setWindowState(document.body.dataset.windowState === 'closed' ? 'normal' : 'closed'));
       minimizeButton.addEventListener('click', () => setWindowState(document.body.dataset.windowState === 'minimized' ? 'normal' : 'minimized'));
       fullscreenButton.addEventListener('click', async () => {
